@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import { Client } from '../config/prismic';
-import { RichText } from 'prismic-reactjs';
+import Head from "next/head";
+import Prismic from "prismic-javascript";
+import { Client, linkResolver } from "../config/prismic";
+import { RichText } from "prismic-reactjs";
 
 const Home = ({ doc }) => (
   <div className="container">
@@ -9,9 +10,7 @@ const Home = ({ doc }) => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <main>
-      {RichText.asText(doc.data.content)}
-    </main>
+    <main>{RichText.asText(doc.data.content, linkResolver)}</main>
 
     <footer>
       <a
@@ -164,16 +163,16 @@ const Home = ({ doc }) => (
       }
     `}</style>
   </div>
-)
+);
 
 export async function getStaticProps(context) {
-  const req = context.req
-  const doc = await Client(req).getSingle('home')
+  const { req } = context;
+  const doc = await Client(req).getSingle("home");
   return {
     props: {
       doc
     }
-  }
+  };
 }
 
-export default Home
+export default Home;
