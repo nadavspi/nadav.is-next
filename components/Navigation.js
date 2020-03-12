@@ -9,11 +9,11 @@ export default function Navigation({ doc }) {
   return (
     <nav>
       {links.map(group => (
-        <>
+        <React.Fragment key={group.link.id}>
           <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
             <a>{RichText.asText(group.text)}</a>
           </Link>{" "}
-        </>
+        </React.Fragment>
       ))}
     </nav>
   );
