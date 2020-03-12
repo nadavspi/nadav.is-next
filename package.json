@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "9.3.0",
+    "next-fonts": "^1.0.3",
     "prismic-javascript": "^2.2.0",
     "prismic-reactjs": "^1.2.0",
     "react": "16.13.0",
