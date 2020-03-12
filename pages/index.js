@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import Prismic from "prismic-javascript";
-import { Client, linkResolver } from "../config/prismic";
+import Navigation from "../components/Navigation";
 import htmlSerializer from "../config/htmlSerializer";
+import { Client } from "../config/prismic";
 import { RichText } from "prismic-reactjs";
 
-const Home = ({ doc }) => (
+const Home = ({ doc, navigation }) => (
   <div className="container">
     <Head>
       <title>Nadav Spiegelman</title>
@@ -13,21 +13,14 @@ const Home = ({ doc }) => (
     </Head>
 
     <main>
+      <Navigation doc={navigation} />
       <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
       <Link href="/writing">
         <a>Writing</a>
       </Link>
     </main>
 
-    <footer>
-      <a
-        href="https://zeit.co?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Powered by <img src="/zeit.svg" alt="ZEIT Logo" />
-      </a>
-    </footer>
+    <footer>Footer is here</footer>
 
     <style jsx>{`
       .container {
@@ -175,9 +168,11 @@ const Home = ({ doc }) => (
 export async function getStaticProps(context) {
   const { req } = context;
   const doc = await Client(req).getSingle("home");
+  const navigation = await Client(req).getSingle("navigation");
   return {
     props: {
-      doc
+      doc,
+      navigation
     }
   };
 }

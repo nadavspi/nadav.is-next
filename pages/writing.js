@@ -14,7 +14,7 @@ export default function Writing({ doc, posts }) {
       <main>
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         {posts.map(post => (
-          <div>
+          <div key={post.id}>
             <Link as={linkResolver(post)} href={hrefResolver(post)}>
               <a>{RichText.asText(post.data.heading)}</a>
             </Link>
