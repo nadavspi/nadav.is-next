@@ -15,9 +15,6 @@ const Home = ({ doc, navigation }) => (
     <main>
       <Navigation doc={navigation} />
       <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
-      <Link href="/writing">
-        <a>Writing</a>
-      </Link>
     </main>
 
     <footer>Footer is here</footer>
