@@ -19,7 +19,12 @@ export default function Reading({ doc, navigation, books }) {
         {books.map(book => (
           <div key={book.id}>
             <Link as={linkResolver(book)} href={hrefResolver(book)}>
-              <a>{RichText.asText(book.data.heading)}</a>
+              <a>
+                <img
+                  src={book.data.cover.url}
+                  alt={RichText.asText(book.data.heading)}
+                />
+              </a>
             </Link>
           </div>
         ))}
