@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver } from "../../config/prismic";
-import { Date, RichText } from "prismic-reactjs";
+import { Date, Link, RichText } from "prismic-reactjs";
 
 export default function Book({ doc, navigation }) {
   return (
@@ -13,6 +13,31 @@ export default function Book({ doc, navigation }) {
       <main>
         <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
+        <dl>
+          <dt>Author</dt>
+          <dd>{RichText.asText(doc.data.author)}</dd>
+          <dt>Year of publication</dt>
+          <dd>{doc.data.publication_date}</dd>
+          <dt>When I read it</dt>
+          <dd>{Date(doc.data.read_date).toString()}</dd>
+          <dt>What I thought</dt>
+          <dd>
+            <RichText render={doc.data.rating} />
+          </dd>
+          <dt>Buy the book</dt>
+          <dd>
+            <a href={Link.url(doc.data.link)}>Amazon</a>
+          </dd>
+        </dl>
+        <section>
+          <h2>Choice Highlights</h2>
+          {doc.data.highlights.map(highlight => (
+            <blockquote key={highlight.id}>
+              <RichText render={highlight.text} />
+            </blockquote>
+          ))}
+        </section>
+        <img src={doc.data.cover.url} alt="" />
       </main>
     </div>
   );

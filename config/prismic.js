@@ -31,6 +31,9 @@ export const linkResolver = doc => {
   if (doc.type === "post") {
     return `/writing/${doc.uid}`;
   }
+  if (doc.type === "book") {
+    return `/reading/${doc.uid}`;
+  }
   return "/";
 };
 
@@ -46,6 +49,9 @@ export const hrefResolver = doc => {
   }
   if (doc.type === "post") {
     return "/writing/[uid]";
+  }
+  if (doc.type === "book") {
+    return "/reading/[uid]";
   }
   return "/";
 };
