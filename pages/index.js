@@ -1,16 +1,23 @@
 import Head from "next/head";
+import Link from "next/link";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver } from "../config/prismic";
+import htmlSerializer from "../config/htmlSerializer";
 import { RichText } from "prismic-reactjs";
 
 const Home = ({ doc }) => (
   <div className="container">
     <Head>
-      <title>Create Next App</title>
+      <title>Nadav Spiegelman</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <main>{RichText.asText(doc.data.content, linkResolver)}</main>
+    <main>
+      <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
+      <Link href="/writing">
+        <a>Writing</a>
+      </Link>
+    </main>
 
     <footer>
       <a

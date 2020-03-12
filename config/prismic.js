@@ -16,3 +16,23 @@ const createClientOptions = (req = null, prismicAccessToken = null) => {
     ...accessTokenOption,
   }
 }
+
+export const linkResolver = (doc) => {
+  if (doc.type === 'page') {
+    return `/${doc.uid}`
+  }
+  if (doc.type === 'post') {
+    return `/writing/${doc.uid}`
+  }
+  return '/'
+}
+
+export const hrefResolver = (doc) => {
+  if (doc.type === 'page') {
+    return `/[uid]`
+  }
+  if (doc.type === 'post') {
+    return '/writing/[uid]'
+  }
+  return '/'
+}
