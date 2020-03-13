@@ -43,7 +43,7 @@ const Home = ({ doc, navigation }) => (
       <HomeContainer>
         <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
       </HomeContainer>
-      <AlignedNav doc={navigation} />
+      <AlignedNav doc={navigation} home />
     </Main>
   </>
 );

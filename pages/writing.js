@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
+import PageContainer from "../components/PageContainer";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 
 export default function Writing({ doc, navigation, posts }) {
   return (
-    <div className="container">
+    <PageContainer>
       <Head>
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
@@ -24,7 +25,7 @@ export default function Writing({ doc, navigation, posts }) {
           </div>
         ))}
       </main>
-    </div>
+    </PageContainer>
   );
 }
 

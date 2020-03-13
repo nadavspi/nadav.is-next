@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
+import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, Link, RichText } from "prismic-reactjs";
 
 export default function Book({ doc, navigation }) {
   return (
-    <div className="container">
+    <PageContainer>
       <Head>
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
@@ -39,7 +40,7 @@ export default function Book({ doc, navigation }) {
         </section>
         <img src={doc.data.cover.url} alt="" />
       </main>
-    </div>
+    </PageContainer>
   );
 }
 

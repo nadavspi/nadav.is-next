@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
+import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 
 export default function Post({ doc, navigation }) {
   return (
-    <div className="container">
+    <PageContainer>
       <Head>
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
@@ -16,7 +17,7 @@ export default function Post({ doc, navigation }) {
         <time>{Date(doc.data.date).toString()}</time>
         <RichText render={doc.data.content} linkResolver={linkResolver} />
       </main>
-    </div>
+    </PageContainer>
   );
 }
 
