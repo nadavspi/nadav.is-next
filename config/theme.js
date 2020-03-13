@@ -3,9 +3,12 @@ export const theme = {
     primary: "FF Tundra, Georgia, serif"
   },
   colors: {
-    primary: "#333",
+    primary: "#bebad4",
+    mutedorange: "#d9a479",
     lightgrey: "#d3d3d3",
-    purple: "rebeccapurple"
+    purple: "#5d178f",
+    darkpurple: "#1b191f",
+    cyan: "#67d6d2"
   },
   fontSizes: [
     ".579rem",

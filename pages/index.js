@@ -10,21 +10,26 @@ import styled from "styled-components";
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   max-width: 40em;
-  margin: auto;
+  margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
+
+  @media (min-width: 40rem) {
+    justify-content: center;
+  }
 `;
 
 const HomeContainer = styled.div`
-  border: 1rem solid rebeccapurple;
+  border: 1rem solid ${props => props.theme.colors.purple};
   padding: 2rem;
 `;
 
 const AlignedNav = styled(Navigation)`
-  align-self: flex-end;
+  @media (min-width: 40rem) {
+    align-self: flex-end;
+  }
 `;
 
 const Home = ({ doc, navigation }) => (
