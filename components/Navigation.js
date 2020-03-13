@@ -5,6 +5,10 @@ import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { RichText } from "prismic-reactjs";
 
 const Container = styled.div`
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.5rem solid ${props => props.theme.colors.purple};
+
   a {
     color: ${props => props.theme.colors.primary};
 

@@ -28,19 +28,43 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${props => props.theme.colors.darkpurple};
   }
 
+  h1,
+  h2,
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
   h1 {
-    font-size: ${props => props.theme.fontSizes[8]};
+    font-size: ${props => props.theme.fontSizes[7]};
+    @media (min-width: 40rem) {
+      font-size: ${props => props.theme.fontSizes[8]};
+    }
+  }
+
+  h2 {
+    font-size: ${props => props.theme.fontSizes[6]};
+    @media (min-width: 40rem) {
+      font-size: ${props => props.theme.fontSizes[7]};
+    }
+  }
+
+  h3 {
+    font-size: ${props => props.theme.fontSizes[5]};
+    @media (min-width: 40rem) {
+      font-size: ${props => props.theme.fontSizes[6]};
+    }
   }
 
   a {
     text-decoration: none;
     font-style: italic;
     color: ${props => props.theme.colors.mutedorange};
-    transition: color .2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 
     &:hover,
     &:active {
-      color: ${props => props.theme.colors.cyan}
+      color: ${props => props.theme.colors.cyan};
     }
   }
 `;
