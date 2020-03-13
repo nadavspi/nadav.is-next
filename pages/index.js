@@ -26,7 +26,7 @@ const HomeContainer = styled.div`
   padding: 2rem;
 `;
 
-const AlignedNav = styled(Navigation)`
+const NavAligner = styled.div`
   @media (min-width: 40rem) {
     align-self: flex-end;
   }
@@ -43,7 +43,9 @@ const Home = ({ doc, navigation }) => (
       <HomeContainer>
         <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
       </HomeContainer>
-      <AlignedNav doc={navigation} home />
+      <NavAligner>
+        <Navigation doc={navigation} home />
+      </NavAligner>
     </Main>
   </>
 );

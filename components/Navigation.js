@@ -5,18 +5,13 @@ import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { RichText } from "prismic-reactjs";
 
 const Container = styled.div`
-  margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 0.5rem solid ${props => props.theme.colors.purple};
-
-  a {
-    color: ${props => props.theme.colors.primary};
-
-    &:hover,
-    &:active {
-      color: ${props => props.theme.colors.mutedorange};
-    }
-  }
+  ${({ home, theme }) =>
+    !home &&
+    `
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.5rem solid ${theme.colors.purple};
+`}
 `;
 
 const Name = styled.h1`
@@ -33,7 +28,7 @@ export default function Navigation({ className, doc, home }) {
   const { links } = doc.data;
 
   return (
-    <Container>
+    <Container home={home}>
       {!home && (
         <Name>
           <Link href="/">
