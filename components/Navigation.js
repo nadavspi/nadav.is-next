@@ -4,23 +4,48 @@ import styled from "styled-components";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { RichText } from "prismic-reactjs";
 
-const Item = styled.span`
-  display: inline-block;
-  margin: 0.5rem;
+const Container = styled.div`
+  a {
+    color: ${props => props.theme.colors.primary};
+
+    &:hover,
+    &:active {
+      color: ${props => props.theme.colors.mutedorange};
+    }
+  }
 `;
 
-export default function Navigation({ className, doc }) {
+const Name = styled.h1`
+  margin: 0;
+  font-size: ${props => props.theme.fontSizes[5]};
+`;
+
+const Item = styled.span`
+  display: inline-block;
+  margin: ${props => (props.home ? "0.5rem" : "0 0.5rem 0 0")};
+`;
+
+export default function Navigation({ className, doc, home }) {
   const { links } = doc.data;
 
   return (
-    <nav className={className}>
-      {links.map(group => (
-        <Item key={group.link.id}>
-          <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
-            <a>{RichText.asText(group.text)}</a>
-          </Link>{" "}
-        </Item>
-      ))}
-    </nav>
+    <Container>
+      {!home && (
+        <Name>
+          <Link href="/">
+            <a>Nadav Spiegelman</a>
+          </Link>
+        </Name>
+      )}
+      <nav className={className}>
+        {links.map(group => (
+          <Item key={group.link.id} home={home}>
+            <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
+              <a>{RichText.asText(group.text)}</a>
+            </Link>{" "}
+          </Item>
+        ))}
+      </nav>
+    </Container>
   );
 }
