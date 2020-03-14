@@ -12,6 +12,21 @@ const PostMain = styled.main`
   margin: 0 auto;
 `;
 
+const PostHeader = styled.header`
+  margin-bottom: ${({ theme }) => theme.fontSizes[8]};
+`;
+
+const PostHeading = styled.div`
+  h1 {
+    margin-bottom: 0;
+  }
+`;
+
+const PostDate = styled.time`
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  font-style: italic;
+`;
+
 export default function Post({ doc, navigation }) {
   return (
     <PageContainer>
@@ -20,8 +35,12 @@ export default function Post({ doc, navigation }) {
       </Head>
       <Navigation doc={navigation} />
       <PostMain>
-        <RichText render={doc.data.heading} linkResolver={linkResolver} />
-        <time>{format(Date(doc.data.date), "MMMM d, yyyy")}</time>
+        <PostHeader>
+          <PostHeading>
+            <RichText render={doc.data.heading} linkResolver={linkResolver} />
+          </PostHeading>
+          <PostDate>{format(Date(doc.data.date), "MMMM d, yyyy")}</PostDate>
+        </PostHeader>
         <RichText render={doc.data.content} linkResolver={linkResolver} />
       </PostMain>
     </PageContainer>
