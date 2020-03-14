@@ -38,24 +38,25 @@ export const GlobalStyle = createGlobalStyle`
   h3 {
     margin-top: 0;
     margin-bottom: 1rem;
+    line-height: 1.3;
   }
 
   h1 {
-    font-size: ${props => props.theme.fontSizes[7]};
+    font-size: ${props => props.theme.fontSizes[6]};
     @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[8]};
     }
   }
 
   h2 {
-    font-size: ${props => props.theme.fontSizes[6]};
+    font-size: ${props => props.theme.fontSizes[5]};
     @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[7]};
     }
   }
 
   h3 {
-    font-size: ${props => props.theme.fontSizes[5]};
+    font-size: ${props => props.theme.fontSizes[4]};
     @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[6]};
     }
