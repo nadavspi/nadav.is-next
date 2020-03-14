@@ -2,8 +2,74 @@ import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
+import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, Link, RichText } from "prismic-reactjs";
+
+const BookInfo = styled.section`
+  margin-bottom: 2rem;
+
+  @media (min-width: 40em) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const Metadata = styled.dl`
+  flex: 3;
+`;
+
+const CoverImage = styled.img`
+  flex: 1;
+`;
+
+const StyledDt = styled.dt`
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  line-height: 1;
+`;
+
+const StyledDd = styled.dd`
+  margin-left: 0;
+  margin-bottom: ${({ theme }) => theme.fontSizes[5]};
+  font-size: ${({ theme }) => theme.fontSizes[5]};
+  font-style: italic;
+
+  p {
+    margin: 0;
+  }
+`;
+
+const Quote = styled.blockquote`
+  position: relative;
+  margin-top: 3rem;
+  margin-left: 0;
+  padding-bottom: 3rem;
+  border-bottom: 0.5rem solid ${({ theme }) => theme.colors.purple};
+
+  @media (min-width: 40rem) {
+    margin-left: 3rem;
+  }
+
+  &:before {
+    position: absolute;
+    top: -0.25em;
+    left: -0.6em;
+    content: "“";
+    font-size: ${({ theme }) => theme.fontSizes[8]};
+    color: ${({ theme }) => theme.colors.mutedorange};
+  }
+
+  p {
+    margin: 0;
+  }
+`;
+
+const HighlightsSection = styled.section`
+  font-size: ${({ theme }) => theme.fontSizes[4]};
+  max-width: 36em;
+`;
 
 export default function Book({ doc, navigation }) {
   return (
@@ -14,29 +80,29 @@ export default function Book({ doc, navigation }) {
       <Navigation doc={navigation} />
       <main>
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
-        <section>
-          <dl>
-            <dt>Author</dt>
-            <dd>{RichText.asText(doc.data.author)}</dd>
-            <dt>Year of publication</dt>
-            <dd>{doc.data.publication_date}</dd>
-            <dt>When I read it</dt>
-            <dd>{Date(doc.data.read_date).toString()}</dd>
-            <dt>What I thought</dt>
-            <dd>
+        <BookInfo>
+          <Metadata>
+            <StyledDt>Author</StyledDt>
+            <StyledDd>{RichText.asText(doc.data.author)}</StyledDd>
+            <StyledDt>Year of publication</StyledDt>
+            <StyledDd>{doc.data.publication_date}</StyledDd>
+            <StyledDt>When I read it</StyledDt>
+            <StyledDd>{Date(doc.data.read_date).toString()}</StyledDd>
+            <StyledDt>What I thought</StyledDt>
+            <StyledDd>
               <RichText render={doc.data.rating} />
-            </dd>
-          </dl>
-          <img src={doc.data.cover.url} alt="" />
-        </section>
-        <section>
+            </StyledDd>
+          </Metadata>
+          <CoverImage src={doc.data.cover.url} alt="" />
+        </BookInfo>
+        <HighlightsSection>
           <h2>Choice Highlights</h2>
           {doc.data.highlights.map(highlight => (
-            <blockquote key={highlight.id}>
+            <Quote>
               <RichText render={highlight.text} />
-            </blockquote>
+            </Quote>
           ))}
-        </section>
+        </HighlightsSection>
       </main>
     </PageContainer>
   );
