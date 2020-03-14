@@ -7,7 +7,7 @@ import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 import { format } from "date-fns";
 
-const PostMain = styled.main`
+export const PostMain = styled.main`
   max-width: 38em;
   margin: 0 auto;
 `;
@@ -22,7 +22,7 @@ const PostHeading = styled.div`
   }
 `;
 
-const PostDate = styled.time`
+export const PostDate = styled.time`
   font-size: ${({ theme }) => theme.fontSizes[3]};
   font-style: italic;
 `;
