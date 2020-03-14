@@ -2,8 +2,15 @@ import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
+import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
+import { format } from "date-fns";
+
+const PostMain = styled.main`
+  max-width: 38em;
+  margin: 0 auto;
+`;
 
 export default function Post({ doc, navigation }) {
   return (
@@ -12,11 +19,11 @@ export default function Post({ doc, navigation }) {
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
       <Navigation doc={navigation} />
-      <main>
+      <PostMain>
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
-        <time>{Date(doc.data.date).toString()}</time>
+        <time>{format(Date(doc.data.date), "MMMM d, yyyy")}</time>
         <RichText render={doc.data.content} linkResolver={linkResolver} />
-      </main>
+      </PostMain>
     </PageContainer>
   );
 }

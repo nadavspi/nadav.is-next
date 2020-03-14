@@ -5,6 +5,7 @@ import PageContainer from "../components/PageContainer";
 import Prismic from "prismic-javascript";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
+import { format } from "date-fns";
 
 export default function Writing({ doc, navigation, posts }) {
   return (
@@ -21,7 +22,7 @@ export default function Writing({ doc, navigation, posts }) {
             <Link as={linkResolver(post)} href={hrefResolver(post)}>
               <a>{RichText.asText(post.data.heading)}</a>
             </Link>
-            <time>{post.data.date}</time>
+            <time>{format(Date(post.data.date), "MMMM d, yyyy")}</time>
           </div>
         ))}
       </main>
