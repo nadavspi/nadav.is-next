@@ -25,10 +25,6 @@ export default function Book({ doc, navigation }) {
           <dd>
             <RichText render={doc.data.rating} />
           </dd>
-          <dt>Buy the book</dt>
-          <dd>
-            <a href={Link.url(doc.data.link)}>Amazon</a>
-          </dd>
         </dl>
         <section>
           <h2>Choice Highlights</h2>
