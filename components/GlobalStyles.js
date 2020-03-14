@@ -28,6 +28,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${props => props.theme.colors.darkpurple};
   }
 
+  img {
+    max-width: 100%;
+  }
+
   h1,
   h2,
   h3 {
