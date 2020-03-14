@@ -11,8 +11,8 @@ export default function Post({ doc, navigation }) {
       <Head>
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
+      <Navigation doc={navigation} />
       <main>
-        <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <time>{Date(doc.data.date).toString()}</time>
         <RichText render={doc.data.content} linkResolver={linkResolver} />

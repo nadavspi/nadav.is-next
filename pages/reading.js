@@ -38,8 +38,8 @@ export default function Reading({ doc, navigation, books }) {
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
 
+      <Navigation doc={navigation} />
       <main>
-        <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <BookList>

@@ -13,8 +13,8 @@ export default function Writing({ doc, navigation, posts }) {
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
 
+      <Navigation doc={navigation} />
       <main>
-        <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         {posts.map(post => (
           <div key={post.id}>

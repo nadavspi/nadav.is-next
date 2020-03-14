@@ -11,21 +11,24 @@ export default function Book({ doc, navigation }) {
       <Head>
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
+      <Navigation doc={navigation} />
       <main>
-        <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
-        <dl>
-          <dt>Author</dt>
-          <dd>{RichText.asText(doc.data.author)}</dd>
-          <dt>Year of publication</dt>
-          <dd>{doc.data.publication_date}</dd>
-          <dt>When I read it</dt>
-          <dd>{Date(doc.data.read_date).toString()}</dd>
-          <dt>What I thought</dt>
-          <dd>
-            <RichText render={doc.data.rating} />
-          </dd>
-        </dl>
+        <section>
+          <dl>
+            <dt>Author</dt>
+            <dd>{RichText.asText(doc.data.author)}</dd>
+            <dt>Year of publication</dt>
+            <dd>{doc.data.publication_date}</dd>
+            <dt>When I read it</dt>
+            <dd>{Date(doc.data.read_date).toString()}</dd>
+            <dt>What I thought</dt>
+            <dd>
+              <RichText render={doc.data.rating} />
+            </dd>
+          </dl>
+          <img src={doc.data.cover.url} alt="" />
+        </section>
         <section>
           <h2>Choice Highlights</h2>
           {doc.data.highlights.map(highlight => (
@@ -34,7 +37,6 @@ export default function Book({ doc, navigation }) {
             </blockquote>
           ))}
         </section>
-        <img src={doc.data.cover.url} alt="" />
       </main>
     </PageContainer>
   );
