@@ -21,7 +21,10 @@ const Name = styled.h1`
 
 const Item = styled.span`
   display: inline-block;
-  margin: ${props => (props.home ? "0.5rem" : "0 0.5rem 0 0")};
+  margin: ${props =>
+    props.home
+      ? props.theme.fontSizes[2]
+      : `0 ${props.theme.fontSizes[2]} 0 0`};
 `;
 
 export default function Navigation({ className, doc, home }) {
