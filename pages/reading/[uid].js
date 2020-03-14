@@ -4,7 +4,7 @@ import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
 import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
-import { Date, Link, RichText } from "prismic-reactjs";
+import { Link, RichText } from "prismic-reactjs";
 import { mq } from "../../config/theme";
 
 const BookInfo = styled.section`
@@ -88,7 +88,7 @@ export default function Book({ doc, navigation }) {
             <StyledDt>Year of publication</StyledDt>
             <StyledDd>{doc.data.publication_date}</StyledDd>
             <StyledDt>When I read it</StyledDt>
-            <StyledDd>{Date(doc.data.read_date).toString()}</StyledDd>
+            <StyledDd>{doc.data.read_date}</StyledDd>
             <StyledDt>What I thought</StyledDt>
             <StyledDd>
               <RichText render={doc.data.rating} />
