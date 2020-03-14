@@ -6,6 +6,7 @@ import Prismic from "prismic-javascript";
 import styled from "styled-components";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
+import { mq } from "../config/theme";
 
 const BookList = styled.ol`
   display: flex;
@@ -22,11 +23,11 @@ const Book = styled.li`
   margin-bottom: 0.5rem;
   width: calc(50% - 1rem);
 
-  @media (min-width: 40rem) {
+  @media (min-width: ${props => mq(props)}) {
     width: calc(25% - 1rem);
   }
 
-  @media (min-width: 70rem) {
+  @media (min-width: ${props => mq(props, "large")}) {
     width: calc(20% - 1rem);
   }
 `;

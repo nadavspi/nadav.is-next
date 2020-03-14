@@ -5,11 +5,12 @@ import Prismic from "prismic-javascript";
 import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, Link, RichText } from "prismic-reactjs";
+import { mq } from "../../config/theme";
 
 const BookInfo = styled.section`
   margin-bottom: 2rem;
 
-  @media (min-width: 40em) {
+  @media (min-width: ${props => mq(props)}) {
     display: flex;
     justify-content: space-between;
   }
@@ -48,7 +49,7 @@ const Quote = styled.blockquote`
   padding-bottom: 3rem;
   border-bottom: 0.5rem solid ${({ theme }) => theme.colors.purple};
 
-  @media (min-width: 40rem) {
+  @media (min-width: ${props => mq(props)}) {
     margin-left: 3rem;
   }
 

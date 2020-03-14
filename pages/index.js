@@ -3,9 +3,10 @@ import Head from "next/head";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import htmlSerializer from "../config/htmlSerializer";
+import styled from "styled-components";
 import { Client } from "../config/prismic";
 import { RichText } from "prismic-reactjs";
-import styled from "styled-components";
+import { mq } from "../config/theme";
 
 const Main = styled.main`
   display: flex;
@@ -16,7 +17,7 @@ const Main = styled.main`
   flex-wrap: wrap;
   align-items: center;
 
-  @media (min-width: 40rem) {
+  @media (min-width: ${props => mq(props)}) {
     justify-content: center;
   }
 `;
@@ -27,7 +28,7 @@ const HomeContainer = styled.div`
 `;
 
 const NavAligner = styled.div`
-  @media (min-width: 40rem) {
+  @media (min-width: ${props => mq(props)}) {
     align-self: flex-end;
   }
 `;

@@ -20,7 +20,13 @@ export const theme = {
     "1.728rem",
     "2.074rem",
     "2.488rem"
-  ]
+  ],
+  breakpoints: {
+    medium: "40rem",
+    large: "70rem"
+  }
 };
+
+export const mq = (props, bp = "medium") => props.theme.breakpoints[bp];
 
 export default theme;

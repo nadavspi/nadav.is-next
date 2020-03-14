@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { mq } from "../config/theme";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -14,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size: 18px;
 
-    @media (min-width: 40rem) {
+    @media (min-width: ${props => mq(props)}) {
       font-size: 23px;
     }
   }
@@ -41,21 +42,21 @@ export const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-size: ${props => props.theme.fontSizes[7]};
-    @media (min-width: 40rem) {
+    @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[8]};
     }
   }
 
   h2 {
     font-size: ${props => props.theme.fontSizes[6]};
-    @media (min-width: 40rem) {
+    @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[7]};
     }
   }
 
   h3 {
     font-size: ${props => props.theme.fontSizes[5]};
-    @media (min-width: 40rem) {
+    @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[6]};
     }
   }
