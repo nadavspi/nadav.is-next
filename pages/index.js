@@ -37,7 +37,6 @@ const Home = ({ doc, navigation }) => (
   <>
     <Head>
       <title>Nadav Spiegelman</title>
-      <link rel="icon" href="/favicon.ico" />
     </Head>
 
     <Main>
