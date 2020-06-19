@@ -7,10 +7,7 @@ import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 import { format } from "date-fns";
 
-export const PostMain = styled.main`
-  max-width: 38em;
-  margin: 0 auto;
-`;
+export const PostMain = styled.main``;
 
 const PostHeader = styled.header`
   margin-bottom: ${({ theme }) => theme.fontSizes[8]};
@@ -27,6 +24,10 @@ export const PostDate = styled.time`
   font-style: italic;
 `;
 
+export const PostContent = styled.div`
+  max-width: 38em;
+`;
+
 export default function Post({ doc, navigation }) {
   return (
     <PageContainer>
@@ -41,7 +42,9 @@ export default function Post({ doc, navigation }) {
           </PostHeading>
           <PostDate>{format(Date(doc.data.date), "MMMM d, yyyy")}</PostDate>
         </PostHeader>
-        <RichText render={doc.data.content} linkResolver={linkResolver} />
+        <PostContent>
+          <RichText render={doc.data.content} linkResolver={linkResolver} />
+        </PostContent>
       </PostMain>
     </PageContainer>
   );
