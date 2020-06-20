@@ -2,6 +2,7 @@ import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
+import SliceRenderer from "../../components/SliceRenderer";
 import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
@@ -44,6 +45,7 @@ export default function Post({ doc, navigation }) {
         </PostHeader>
         <PostContent>
           <RichText render={doc.data.content} linkResolver={linkResolver} />
+          <SliceRenderer doc={doc} />
         </PostContent>
       </PostMain>
     </PageContainer>
