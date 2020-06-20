@@ -67,7 +67,7 @@ export async function getStaticProps({ params, req }) {
   const navigation = await Client(req).getSingle("navigation");
   const books = await Client().query(
     Prismic.Predicates.at("document.type", "book"),
-    { orderings: "[my.book.read_date desc]" }
+    { orderings: "[my.book.date desc]" }
   );
   return {
     props: {
