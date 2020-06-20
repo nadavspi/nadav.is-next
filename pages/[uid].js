@@ -2,6 +2,7 @@ import Head from "next/head";
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
 import Prismic from "prismic-javascript";
+import SliceRender from "../components/SliceRenderer";
 import { Client, linkResolver } from "../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 
@@ -15,6 +16,7 @@ export default function Page({ doc, navigation }) {
         <Navigation doc={navigation} />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
+        <SliceRender doc={doc} className="" />
       </main>
     </PageContainer>
   );
