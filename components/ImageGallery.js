@@ -6,7 +6,8 @@ import { linkResolver } from "../config/prismic";
 const Container = styled.div`
   margin-top: ${({ theme }) => theme.fontSizes[8]};
   padding-top: ${({ theme }) => theme.fontSizes[8]};
-  border-top: 0.5rem solid ${({ theme }) => theme.colors.purple};
+  border-top: ${({ theme }) => theme.border} solid
+    ${({ theme }) => theme.colors.purple};
 `;
 
 const Figure = styled.figure`

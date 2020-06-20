@@ -10,13 +10,18 @@ const Container = styled.div`
     `
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
-    border-bottom: 0.5rem solid ${theme.colors.purple};
+    border-bottom: ${theme.border} solid ${theme.colors.purple};
 `}
 `;
 
 const Name = styled.h1`
   margin: 0;
+  margin-bottom: 0.2rem;
   font-size: ${props => props.theme.fontSizes[5]};
+`;
+
+const Nav = styled.nav`
+  margin-bottom: 0.2rem;
 `;
 
 const Item = styled.span`
@@ -27,7 +32,7 @@ const Item = styled.span`
       : `0 ${props.theme.fontSizes[2]} 0 0`};
 `;
 
-export default function Navigation({ className, doc, home }) {
+export default function Navigation({ doc, home }) {
   const { links } = doc.data;
 
   return (
@@ -39,7 +44,7 @@ export default function Navigation({ className, doc, home }) {
           </Link>
         </Name>
       )}
-      <nav className={className}>
+      <Nav>
         {links.map(group => (
           <Item key={group.link.id} home={home}>
             <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
@@ -47,7 +52,7 @@ export default function Navigation({ className, doc, home }) {
             </Link>{" "}
           </Item>
         ))}
-      </nav>
+      </Nav>
     </Container>
   );
 }

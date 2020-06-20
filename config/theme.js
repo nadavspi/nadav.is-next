@@ -10,6 +10,7 @@ export const theme = {
     darkpurple: "#1b191f",
     cyan: "#67d6d2"
   },
+  border: "0.2rem",
   fontSizes: [
     ".579rem",
     ".694rem",
