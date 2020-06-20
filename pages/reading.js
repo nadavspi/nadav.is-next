@@ -1,4 +1,5 @@
 import Head from "next/head";
+import LazyLoad from "react-lazyload";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
@@ -48,10 +49,12 @@ export default function Reading({ doc, navigation, books }) {
             <Book key={book.id}>
               <Link as={linkResolver(book)} href={hrefResolver(book)}>
                 <a>
-                  <img
-                    src={book.data.cover.url}
-                    alt={RichText.asText(book.data.heading)}
-                  />
+                  <LazyLoad once>
+                    <img
+                      src={book.data.cover.url}
+                      alt={RichText.asText(book.data.heading)}
+                    />
+                  </LazyLoad>
                 </a>
               </Link>
             </Book>
