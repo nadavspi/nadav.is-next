@@ -26,9 +26,11 @@ const ImageGallery = ({ items }) => {
       {items.map(({ caption, image }, index) => (
         <Figure key={index}>
           <img src={image.url} alt={image.alt} key={image.alt} />
-          <figcaption>
-            <RichText render={caption} linkResolver={linkResolver} />
-          </figcaption>
+          {caption && (
+            <figcaption>
+              <RichText render={caption} linkResolver={linkResolver} />
+            </figcaption>
+          )}
         </Figure>
       ))}
     </Container>
