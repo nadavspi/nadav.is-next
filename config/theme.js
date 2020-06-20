@@ -8,7 +8,7 @@ export const theme = {
     lightgrey: "#d3d3d3",
     purple: "#5d178f",
     darkpurple: "#1b191f",
-    cyan: "#67d6d2"
+    cyan: "#2baec2"
   },
   border: "0.2rem",
   fontSizes: [
