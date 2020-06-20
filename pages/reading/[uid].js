@@ -47,7 +47,8 @@ const Quote = styled.blockquote`
   margin-top: 3rem;
   margin-left: 0;
   padding-bottom: 3rem;
-  border-bottom: 0.5rem solid ${({ theme }) => theme.colors.purple};
+  border-bottom: ${({ theme }) => theme.border} solid
+    ${({ theme }) => theme.colors.purple};
 
   @media (min-width: ${props => mq(props)}) {
     margin-left: 3rem;
