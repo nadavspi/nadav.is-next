@@ -12,7 +12,7 @@
     "next": "^9.4.4",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.0.3",
-    "prismic-javascript": "^2.2.0",
+    "prismic-javascript": "^3.0.0",
     "prismic-reactjs": "^1.2.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
