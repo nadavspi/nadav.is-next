@@ -5,7 +5,7 @@ import Head from "next/head";
 import React from "react";
 import theme from "../config/theme";
 import { ThemeProvider } from "styled-components";
-import "react-image-gallery/styles/css/image-gallery.css";
+import "./image-gallery.scss";
 
 export default class MyApp extends App {
   render() {
