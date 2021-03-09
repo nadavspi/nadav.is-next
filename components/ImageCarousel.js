@@ -16,7 +16,13 @@ const ImageCarousel = ({ items }) => {
   });
   return (
     <Container>
-      <Carousel items={images} lazyLoad={true} />
+      <Carousel
+        items={images}
+        lazyLoad={true}
+        showIndex={true}
+        showPlayButton={false}
+        showThumbnails={false}
+      />
     </Container>
   );
 };
