@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import Prismic from "prismic-javascript";
-import React, { useEffect } from "react";
+import React from "react";
 import SliceRender from "../../components/SliceRenderer";
 import { Client, linkResolver } from "../../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
@@ -12,16 +12,6 @@ export default function Page({ doc, navigation }) {
   const router = useRouter();
   const { section } = router.query;
 
-  useEffect(() => {
-    if (!section) {
-      const sectionNav = doc.data.body.find(
-        (item) => item.slice_type === "navigation"
-      );
-      router.replace({
-        pathname: `/photography/${sectionNav.items[0].section_id}`,
-      });
-    }
-  }, []);
   return (
     <PageContainer>
       <Head>
