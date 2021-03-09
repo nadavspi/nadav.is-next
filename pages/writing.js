@@ -33,8 +33,9 @@ export default function Writing({ doc, navigation, posts }) {
       <Navigation doc={navigation} />
       <PostMain>
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
+        <RichText render={doc.data.content} linkResolver={linkResolver} />
         <Posts>
-          {posts.map(post => (
+          {posts.map((post) => (
             <Post key={post.id}>
               <Link as={linkResolver(post)} href={hrefResolver(post)}>
                 <a>{RichText.asText(post.data.heading)}</a>
@@ -61,7 +62,7 @@ export async function getStaticProps({ params, req }) {
     props: {
       doc,
       navigation,
-      posts: posts.results
-    }
+      posts: posts.results,
+    },
   };
 }
