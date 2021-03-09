@@ -29,10 +29,7 @@ const SectionNav = ({ items }) => {
 
   return items.map((item) => {
     return (
-      <SectionLink
-        active={section && section[0] === item.section_id}
-        key={item.section_id}
-      >
+      <SectionLink active={section === item.section_id} key={item.section_id}>
         <Link href={`/photography/${item.section_id}`} shallow={true}>
           <a>{RichText.asText(item.section_name)}</a>
         </Link>

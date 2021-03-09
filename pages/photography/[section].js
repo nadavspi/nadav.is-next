@@ -13,7 +13,6 @@ export default function Page({ doc, navigation }) {
   const { section } = router.query;
 
   useEffect(() => {
-    console.log({ router, section });
     if (!section) {
       const sectionNav = doc.data.body.find(
         (item) => item.slice_type === "navigation"
@@ -56,12 +55,9 @@ export async function getStaticPaths() {
   );
 
   return {
-    paths: [
-      ...sectionNav.items.map((section) => ({
-        params: { section: [section.section_id] },
-      })),
-      { params: { section: undefined } },
-    ],
+    paths: sectionNav.items.map((section) => ({
+      params: { section: section.section_id },
+    })),
     fallback: false,
   };
 }

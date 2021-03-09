@@ -10,7 +10,7 @@ const Container = styled.div`
 const ImageCarousel = ({ items, sectionId }) => {
   const router = useRouter();
   const { section } = router.query;
-  if (!section || section[0] !== sectionId) {
+  if (section !== sectionId) {
     return null;
   }
 
