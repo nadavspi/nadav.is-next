@@ -1,4 +1,5 @@
 import ImageCarousel from "./ImageCarousel";
+import SectionNav from "./SectionNav";
 import ImageGallery from "./ImageGallery";
 import React from "react";
 
@@ -11,8 +12,17 @@ const SliceRenderer = ({ className, doc }) => {
 
     if (slice.slice_type === "image_carousel") {
       return (
-        <ImageCarousel className={className} items={slice.items} key={i} />
+        <ImageCarousel
+          className={className}
+          items={slice.items}
+          key={i}
+          sectionId={slice.primary.section_id}
+        />
       );
+    }
+
+    if (slice.slice_type === "navigation") {
+      return <SectionNav className={className} items={slice.items} key={i} />;
     }
 
     return null;
