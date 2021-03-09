@@ -28,8 +28,8 @@ export async function getStaticProps({ params, req }) {
   return {
     props: {
       doc,
-      navigation
-    }
+      navigation,
+    },
   };
 }
 
@@ -39,10 +39,14 @@ export async function getStaticPaths() {
     { orderings: "[my.page.date desc]" }
   );
 
+  const excluded = ["photography"];
+
   return {
-    paths: pages.results.map(page => ({
-      params: { uid: page.uid }
-    })),
-    fallback: false
+    paths: pages.results
+      .filter((page) => excluded.indexOf(page.uid) === -1)
+      .map((page) => ({
+        params: { uid: page.uid },
+      })),
+    fallback: false,
   };
 }
