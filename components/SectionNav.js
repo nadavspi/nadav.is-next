@@ -20,22 +20,20 @@ const SectionLink = styled.div`
 `;
 
 const SectionNav = ({ items }) => {
-  if (!items.length) {
-    return null;
-  }
   const router = useRouter();
   const { section } = router.query;
 
+  if (!items.length) {
+    return null;
+  }
+
   return items.map((item) => {
     return (
-      <SectionLink active={section === item.section_id}>
-        <Link
-          href={{
-            query: { section: item.section_id },
-          }}
-          key={item.section_id}
-          shallow={true}
-        >
+      <SectionLink
+        active={section && section[0] === item.section_id}
+        key={item.section_id}
+      >
+        <Link href={`/photography/${item.section_id}`} shallow={true}>
           <a>{RichText.asText(item.section_name)}</a>
         </Link>
       </SectionLink>
