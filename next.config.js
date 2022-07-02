@@ -9,7 +9,7 @@ module.exports = withPlugins([withFonts], {
     return [
       {
         source: "/photography",
-        destination: "/photography/gowanus",
+        destination: "/photography/artists",
         permanent: false,
       },
     ];
