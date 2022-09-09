@@ -17,13 +17,13 @@ const Main = styled.main`
   flex-wrap: wrap;
   align-items: center;
 
-  @media (min-width: ${props => mq(props)}) {
+  @media (min-width: ${(props) => mq(props)}) {
     justify-content: center;
   }
 `;
 
 const HomeContainer = styled.div`
-  border: 1rem solid ${props => props.theme.colors.purple};
+  border: 1rem solid ${(props) => props.theme.colors.purple};
   padding: 2rem;
 `;
 
@@ -35,22 +35,60 @@ const Home = ({ doc, navigation }) => (
 
     <Main>
       <HomeContainer>
-        <RichText render={doc.data.content} htmlSerializer={htmlSerializer} />
+        <h2>My name is Nadav Spiegelman.</h2>
+        <p>I am...</p>
+        <ul>
+          <li>
+            <a href="/photography">Photographer</a>
+          </li>
+          <li>Queer</li>
+          <li>Computer geek</li>
+          <li>Jazz fan &amp; (formerly professional) musician</li>
+          <li>Israeli &amp; American &amp; neither </li>
+          <li><a href="/reading">Reader</a></li>
+          <li>
+            Student
+            <ul>
+              <li>Mandarin Chinese</li>
+              <li>History of the AIDS epidemic</li>
+              <li>Psychology</li>
+              <li>Meditation</li>
+              <li>Buddhisms</li>
+              <li>Yoga</li>
+            </ul>
+          </li>
+          <li>Diarist</li>
+          <li>Cook</li>
+          <li>
+            Collector
+            <ul>
+              <li>Fountain pens</li>
+              <li>Photo books</li>
+              <li>Tea</li>
+              <li>Watches</li>
+            </ul>
+          </li>
+          <li>D&amp;D player</li>
+          <li>Polyamorous</li>
+          <li>Coffee aficionado</li>
+          <li>Darkroom printer</li>
+          <li>Picture framer</li>
+          <li>Note taker</li>
+          <li>Fan of bulleted lists</li>
+        </ul>
       </HomeContainer>
-        <Navigation doc={navigation} home />
+      <Navigation doc={navigation} home />
     </Main>
   </>
 );
 
 export async function getStaticProps(context) {
   const { req } = context;
-  const doc = await Client(req).getSingle("home");
   const navigation = await Client(req).getSingle("navigation");
   return {
     props: {
-      doc,
-      navigation
-    }
+      navigation,
+    },
   };
 }
 
