@@ -6,22 +6,18 @@ import styled from "styled-components";
 import { Client, linkResolver } from "../../config/prismic";
 import { Link, RichText } from "prismic-reactjs";
 import { mq } from "../../config/theme";
+import { getBook, getBooks, getHighlights } from "../../lib/readwise";
+import { useRouter } from "next/router";
+import { formatISO, parseISO } from "date-fns";
 
 const BookInfo = styled.section`
   margin-bottom: 2rem;
-
-  @media (min-width: ${props => mq(props)}) {
-    display: flex;
-    justify-content: space-between;
-  }
 `;
 
-const Metadata = styled.dl`
-  flex: 3;
-`;
+const Metadata = styled.dl``;
 
 const CoverImage = styled.img`
-  flex: 1;
+  max-width: 300px;
 `;
 
 const StyledDt = styled.dt`
@@ -50,7 +46,7 @@ const Quote = styled.blockquote`
   border-bottom: ${({ theme }) => theme.border} solid
     ${({ theme }) => theme.colors.purple};
 
-  @media (min-width: ${props => mq(props)}) {
+  @media (min-width: ${(props) => mq(props)}) {
     margin-left: 3rem;
   }
 
@@ -73,64 +69,76 @@ const HighlightsSection = styled.section`
   max-width: 36em;
 `;
 
-export default function Book({ doc, navigation }) {
+export default function Book({ book, navigation, highlights }) {
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <PageContainer>
+        <main>
+          <h3>Loading...</h3>
+        </main>
+      </PageContainer>
+    );
+  }
+
   return (
     <PageContainer>
       <Head>
-        <title>{RichText.asText(doc.data.heading)}</title>
+        <title>{book.title}</title>
       </Head>
       <Navigation doc={navigation} />
       <main>
-        <RichText render={doc.data.heading} linkResolver={linkResolver} />
+        <h1>{book.title}</h1>
         <BookInfo>
           <Metadata>
             <StyledDt>Author</StyledDt>
-            <StyledDd>{RichText.asText(doc.data.author)}</StyledDd>
-            <StyledDt>Year of publication</StyledDt>
-            <StyledDd>{doc.data.publication_date}</StyledDd>
-            <StyledDt>When I read it</StyledDt>
-            <StyledDd>{doc.data.read_date}</StyledDd>
-            <StyledDt>What I thought</StyledDt>
+            <StyledDd>{book.author}</StyledDd>
+            <StyledDt>My last highlight</StyledDt>
             <StyledDd>
-              <RichText render={doc.data.rating} />
+              {formatISO(parseISO(book.last_highlight_at), {
+                representation: "date",
+              })}
             </StyledDd>
+            <StyledDt>Number of highlights</StyledDt>
+            <StyledDd>{book.num_highlights || "0"}</StyledDd>
           </Metadata>
-          <CoverImage src={doc.data.cover.url} alt="" />
+          {!book.cover_image_url.includes("default-book") && (
+            <CoverImage src={book.cover_image_url} alt="" />
+          )}
         </BookInfo>
-        <HighlightsSection>
-          <h2>Choice Highlights</h2>
-          {doc.data.highlights.map(highlight => (
-            <Quote>
-              <RichText render={highlight.text} />
-            </Quote>
-          ))}
-        </HighlightsSection>
+        {book.num_highlights > 0 && (
+          <HighlightsSection>
+            <h2>My Highlights</h2>
+            {highlights.map((highlight) => (
+              <Quote key={highlight.id}>{highlight.text}</Quote>
+            ))}
+          </HighlightsSection>
+        )}
       </main>
     </PageContainer>
   );
 }
 
 export async function getStaticProps({ params, req }) {
-  const doc = await Client(req).getByUID("book", params.uid);
   const navigation = await Client(req).getSingle("navigation");
+  const book = await getBook(params.uid);
+  const highlights = await getHighlights(params.uid);
   return {
     props: {
-      doc,
-      navigation
-    }
+      book,
+      navigation,
+      highlights: highlights.results,
+    },
   };
 }
 
 export async function getStaticPaths() {
-  const books = await Client().query(
-    Prismic.Predicates.at("document.type", "book"),
-    { orderings: "[my.book.date desc]" }
-  );
+  const books = await getBooks(5);
 
   return {
-    paths: books.results.map(book => ({
-      params: { uid: book.uid }
+    paths: books.results.map((book) => ({
+      params: { uid: `${book.id}` },
     })),
-    fallback: false
+    fallback: true,
   };
 }
