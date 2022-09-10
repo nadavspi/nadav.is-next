@@ -129,6 +129,7 @@ export async function getStaticProps({ params, req }) {
       navigation,
       highlights: highlights.results,
     },
+    revalidate: 3600,
   };
 }
 

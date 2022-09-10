@@ -34,14 +34,6 @@ const Author = styled.span`
   font-style: normal;
 `;
 
-const excludedBooks = (book) => {
-  if (book.title === "Instapaper") {
-    return false;
-  }
-
-  return true;
-};
-
 export default function Reading({ doc, navigation, books }) {
   return (
     <PageContainer>
@@ -54,7 +46,7 @@ export default function Reading({ doc, navigation, books }) {
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <BookList>
-          {books.filter(excludedBooks).map((book) => (
+          {books.map((book) => (
             <Book key={book.id}>
               <Link
                 as={linkResolver({ type: "book", uid: book.id })}
@@ -84,5 +76,6 @@ export async function getStaticProps({ params, req }) {
       navigation,
       books: books.results,
     },
+    revalidate: 3600,
   };
 }
