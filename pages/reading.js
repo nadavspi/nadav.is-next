@@ -8,11 +8,9 @@ import styled from "styled-components";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
 import { Date, RichText } from "prismic-reactjs";
 import { mq } from "../config/theme";
+import { getBooks } from "../lib/readwise";
 
-const BookList = styled.ol`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+const BookList = styled.ul`
   margin: 0;
   margin-top: 2rem;
   padding: 0;
@@ -20,18 +18,29 @@ const BookList = styled.ol`
 `;
 
 const Book = styled.li`
-  margin-right: 1rem;
-  margin-bottom: 0.5rem;
-  width: calc(50% - 1rem);
-
-  @media (min-width: ${props => mq(props)}) {
-    width: calc(25% - 1rem);
-  }
-
-  @media (min-width: ${props => mq(props, "large")}) {
-    width: calc(20% - 1rem);
-  }
+  margin-bottom: 1.5rem;
 `;
+
+const BookLink = styled.a`
+  display: inline-flex;
+  flex-direction: column;
+  cursor: pointer;
+`;
+
+const Title = styled.span``;
+const Author = styled.span`
+  color: ${(props) => props.theme.colors.primary};
+  font-size: ${(props) => props.theme.fontSizes[2]};
+  font-style: normal;
+`;
+
+const excludedBooks = (book) => {
+  if (book.title === "Instapaper") {
+    return false;
+  }
+
+  return true;
+};
 
 export default function Reading({ doc, navigation, books }) {
   return (
@@ -45,17 +54,17 @@ export default function Reading({ doc, navigation, books }) {
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <BookList>
-          {books.map(book => (
+          {books.filter(excludedBooks).map((book) => (
             <Book key={book.id}>
-              <Link as={linkResolver(book)} href={hrefResolver(book)}>
-                <a>
-                  <LazyLoad once>
-                    <img
-                      src={book.data.cover.url}
-                      alt={RichText.asText(book.data.heading)}
-                    />
-                  </LazyLoad>
-                </a>
+              <Link
+                as={linkResolver({ type: "book", uid: book.id })}
+                href={hrefResolver({ type: "book" })}
+                prefetch={false}
+              >
+                <BookLink>
+                  <Title>{book.title}</Title>
+                  <Author>by {book.author}</Author>
+                </BookLink>
               </Link>
             </Book>
           ))}
@@ -68,15 +77,12 @@ export default function Reading({ doc, navigation, books }) {
 export async function getStaticProps({ params, req }) {
   const doc = await Client(req).getSingle("books");
   const navigation = await Client(req).getSingle("navigation");
-  const books = await Client().query(
-    Prismic.Predicates.at("document.type", "book"),
-    { orderings: "[my.book.date desc]" }
-  );
+  const books = await getBooks();
   return {
     props: {
       doc,
       navigation,
-      books: books.results
-    }
+      books: books.results,
+    },
   };
 }
