@@ -48,7 +48,6 @@ export default function Reading({ doc, navigation, books }) {
               <Link
                 as={linkResolver({ type: "book", slug: book.slug })}
                 href={hrefResolver({ type: "book" })}
-                prefetch={false}
               >
                 <BookLink href={`/reading/${book.slug}`}>
                   <Title>{book.title}</Title>

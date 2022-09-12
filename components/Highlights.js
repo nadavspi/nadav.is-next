@@ -35,6 +35,7 @@ const HighlightsSection = styled.section`
 `;
 
 const Highlights = ({ book }) => {
+  if (!book) return null;
   if (book.num_highlights == 0) {
     return;
   }
