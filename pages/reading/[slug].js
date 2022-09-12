@@ -1,12 +1,14 @@
 import Head from "next/head";
+import Highlights from "../../components/Highlights";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import styled from "styled-components";
-import { Client, linkResolver } from "../../config/prismic";
-import { getBook, getBooks, getHighlights } from "../../lib/readwise";
-import { useRouter } from "next/router";
+import useSWR from "swr";
+import { Client } from "../../config/prismic";
+import { fetcher } from "../../lib/readwise";
 import { formatISO, parseISO } from "date-fns";
-import Highlights from "../../components/Highlights";
+import { getBooks } from "../../lib/readwise";
+import { useRouter } from "next/router";
 
 const BookInfo = styled.section`
   margin-bottom: 2rem;
@@ -36,19 +38,27 @@ const StyledDd = styled.dd`
   }
 `;
 
-export default function Book({ book, navigation, highlights }) {
+const Loading = ({ navigation }) => (
+  <PageContainer>
+    {navigation && <Navigation doc={navigation} />}
+    <main>
+      <h3>Loading...</h3>
+    </main>
+  </PageContainer>
+);
+
+export default function Book({ navigation }) {
   const router = useRouter();
-  if (router.isFallback) {
-    return (
-      <PageContainer>
-        <main>
-          <h3>Loading...</h3>
-        </main>
-      </PageContainer>
-    );
+  const { slug } = router.query;
+
+  const { data: book, error } = useSWR(`/api/books/${slug}`, fetcher);
+
+  if (!slug || router.isFallback) {
+    return <Loading />;
   }
 
-  if (book.error) {
+  if (error || (book && book.error)) {
+    console.log({ error, book });
     return (
       <PageContainer>
         <main>
@@ -56,6 +66,10 @@ export default function Book({ book, navigation, highlights }) {
         </main>
       </PageContainer>
     );
+  }
+
+  if (!book) {
+    return <Loading />;
   }
 
   return (
@@ -91,14 +105,11 @@ export default function Book({ book, navigation, highlights }) {
 
 export async function getStaticProps({ params, req }) {
   const navigation = await Client(req).getSingle("navigation");
-  const book = await getBook(params.uid);
 
   return {
     props: {
-      book,
       navigation,
     },
-    revalidate: 3600,
   };
 }
 
@@ -107,7 +118,7 @@ export async function getStaticPaths() {
 
   return {
     paths: books.results.map((book) => ({
-      params: { uid: `${book.id}` },
+      params: { slug: `${book.id}` },
     })),
     fallback: true,
   };
