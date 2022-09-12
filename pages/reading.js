@@ -1,13 +1,10 @@
 import Head from "next/head";
-import LazyLoad from "react-lazyload";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
-import Prismic from "prismic-javascript";
 import styled from "styled-components";
 import { Client, linkResolver, hrefResolver } from "../config/prismic";
-import { Date, RichText } from "prismic-reactjs";
-import { mq } from "../config/theme";
+import { RichText } from "prismic-reactjs";
 import { getBooks } from "../lib/readwise";
 
 const BookList = styled.ul`
@@ -49,11 +46,11 @@ export default function Reading({ doc, navigation, books }) {
           {books.map((book) => (
             <Book key={book.id}>
               <Link
-                as={linkResolver({ type: "book", uid: book.id })}
+                as={linkResolver({ type: "book", uid: book.slug })}
                 href={hrefResolver({ type: "book" })}
                 prefetch={false}
               >
-                <BookLink>
+                <BookLink href={`/reading/${book.slug}`}>
                   <Title>{book.title}</Title>
                   <Author>by {book.author}</Author>
                 </BookLink>
