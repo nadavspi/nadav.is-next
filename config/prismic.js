@@ -32,7 +32,7 @@ export const linkResolver = doc => {
     return `/writing/${doc.uid}`;
   }
   if (doc.type === "book") {
-    return `/reading/${doc.uid}`;
+    return `/reading/${doc.slug}`;
   }
   return "/";
 };
@@ -51,7 +51,7 @@ export const hrefResolver = doc => {
     return "/writing/[uid]";
   }
   if (doc.type === "book") {
-    return "/reading/[uid]";
+    return "/reading/[slug]";
   }
   return "/";
 };

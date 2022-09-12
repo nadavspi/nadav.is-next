@@ -39,13 +39,19 @@ const Home = ({ doc, navigation }) => (
         <p>I am...</p>
         <ul>
           <li>
-            <a href="/photography">Photographer</a>
+            <Link href="/photography">
+              <a href="/photography">Photographer</a>
+            </Link>
           </li>
           <li>Queer</li>
           <li>Computer geek</li>
           <li>Jazz fan &amp; (formerly professional) musician</li>
           <li>Israeli &amp; American &amp; neither </li>
-          <li><a href="/reading">Reader</a></li>
+          <li>
+            <Link href="/reading">
+              <a href="/reading">Reader</a>
+            </Link>
+          </li>
           <li>
             Student
             <ul>

@@ -46,9 +46,8 @@ export default function Reading({ doc, navigation, books }) {
           {books.map((book) => (
             <Book key={book.id}>
               <Link
-                as={linkResolver({ type: "book", uid: book.slug })}
+                as={linkResolver({ type: "book", slug: book.slug })}
                 href={hrefResolver({ type: "book" })}
-                prefetch={false}
               >
                 <BookLink href={`/reading/${book.slug}`}>
                   <Title>{book.title}</Title>
