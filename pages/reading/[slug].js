@@ -54,11 +54,10 @@ export default function Book({ navigation }) {
   const { data: book, error } = useSWR(`/api/books/${slug}`, fetcher);
 
   if (!slug || router.isFallback) {
-    return <Loading />;
+    return <Loading navigation={navigation} />;
   }
 
   if (error || (book && book.error)) {
-    console.log({ error, book });
     return (
       <PageContainer>
         <main>
@@ -69,7 +68,7 @@ export default function Book({ navigation }) {
   }
 
   if (!book) {
-    return <Loading />;
+    return <Loading navigation={navigation} />;
   }
 
   return (
