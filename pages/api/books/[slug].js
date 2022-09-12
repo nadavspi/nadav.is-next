@@ -4,6 +4,9 @@ export default async function handler(req, res) {
   const { slug } = req.query;
   const data = await getBook(slug);
 
-  res.setHeader("Cache-Control", "max-age=0, s-maxage=86400");
+  res.setHeader(
+    "Cache-Control",
+    "max-age=0, s-maxage=86400, stale-while-revalidate"
+  );
   return res.status(200).json(data);
 }
