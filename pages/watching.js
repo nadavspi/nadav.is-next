@@ -24,9 +24,8 @@ const Item = styled.li`
 `;
 
 const Title = styled.h3``;
-const Chinese = styled.span``;
-const English = styled.span`
-  margin-left: 0.5em;
+const Chinese = styled.div``;
+const English = styled.div`
   font-style: italic;
 `;
 
@@ -47,7 +46,7 @@ export default function Page({ items, navigation }) {
             <Item key={item.slug}>
               <Title>
                 <Chinese>{item.titleZh}</Chinese>
-                <English>({item.title})</English>
+                <English>{item.title}</English>
               </Title>
               <div dangerouslySetInnerHTML={{ __html: item.contentHtml }} />
             </Item>
