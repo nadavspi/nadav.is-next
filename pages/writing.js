@@ -38,7 +38,7 @@ export default function Writing({ doc, navigation, posts }) {
           {posts.map((post) => (
             <Post key={post.id}>
               <Link as={linkResolver(post)} href={hrefResolver(post)}>
-                <a>{RichText.asText(post.data.heading)}</a>
+                {RichText.asText(post.data.heading)}
               </Link>
               <PostDate>
                 {format(Date(post.data.date), "MMMM d, yyyy")}
