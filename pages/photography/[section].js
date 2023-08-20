@@ -18,7 +18,7 @@ export default function Page({ doc, navigation }) {
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
       <main>
-        <Navigation doc={navigation} />
+        <Navigation />
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <SliceRender doc={doc} className="" />
@@ -29,11 +29,9 @@ export default function Page({ doc, navigation }) {
 
 export async function getStaticProps({ params, req }) {
   const doc = await Client(req).getByUID("page", "photography");
-  const navigation = await Client(req).getSingle("navigation");
   return {
     props: {
       doc,
-      navigation,
     },
   };
 }
@@ -41,7 +39,7 @@ export async function getStaticProps({ params, req }) {
 export async function getStaticPaths() {
   const doc = await Client().getByUID("page", "photography");
   const sectionNav = doc.data.body.find(
-    (item) => item.slice_type === "navigation"
+    (item) => item.slice_type === "navigation",
   );
 
   return {

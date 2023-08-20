@@ -38,7 +38,7 @@ export default function Reading({ doc, navigation, books }) {
         <title>{RichText.asText(doc.data.heading)}</title>
       </Head>
 
-      <Navigation doc={navigation} />
+      <Navigation />
       <main>
         <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
@@ -48,7 +48,8 @@ export default function Reading({ doc, navigation, books }) {
               <Link
                 as={linkResolver({ type: "book", slug: book.slug })}
                 href={hrefResolver({ type: "book" })}
-                legacyBehavior>
+                legacyBehavior
+              >
                 <BookLink href={`/reading/${book.slug}`}>
                   <Title>{book.title}</Title>
                   <Author>by {book.author}</Author>
@@ -64,12 +65,10 @@ export default function Reading({ doc, navigation, books }) {
 
 export async function getStaticProps({ params, req }) {
   const doc = await Client(req).getSingle("books");
-  const navigation = await Client(req).getSingle("navigation");
   const books = await getBooks();
   return {
     props: {
       doc,
-      navigation,
       books: books.results,
     },
     revalidate: 3600,

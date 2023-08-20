@@ -82,19 +82,9 @@ const Home = ({ doc, navigation }) => (
           <li>Fan of bulleted lists</li>
         </ul>
       </HomeContainer>
-      <Navigation doc={navigation} home />
+      <Navigation home />
     </Main>
   </>
 );
-
-export async function getStaticProps(context) {
-  const { req } = context;
-  const navigation = await Client(req).getSingle("navigation");
-  return {
-    props: {
-      navigation,
-    },
-  };
-}
 
 export default Home;
