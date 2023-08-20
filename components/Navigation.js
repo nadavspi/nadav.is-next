@@ -40,7 +40,7 @@ export default function Navigation({ doc, home }) {
       {!home && (
         <Name>
           <Link href="/">
-            <a>Nadav Spiegelman</a>
+            Nadav Spiegelman
           </Link>
         </Name>
       )}
@@ -48,7 +48,7 @@ export default function Navigation({ doc, home }) {
         {links.map(group => (
           <Item key={group.link.id} home={home}>
             <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
-              <a>{RichText.asText(group.text)}</a>
+              {RichText.asText(group.text)}
             </Link>{" "}
           </Item>
         ))}

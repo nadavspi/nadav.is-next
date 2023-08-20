@@ -35,15 +35,14 @@ const HighlightsSection = styled.section`
 `;
 
 const Highlights = ({ book }) => {
+  const { data: highlights, error } = useSWR(
+    `/api/books/highlights/${book.id}`,
+    fetcher,
+  );
   if (!book) return null;
   if (book.num_highlights == 0) {
     return;
   }
-
-  const { data: highlights, error } = useSWR(
-    `/api/books/highlights/${book.id}`,
-    fetcher
-  );
 
   if (error) return nulll;
 
