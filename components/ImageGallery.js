@@ -1,19 +1,19 @@
-import LazyLoad from "react-lazyload";
+import {RichText} from "prismic-reactjs";
 import React from "react";
 import styled from "styled-components";
-import { RichText } from "prismic-reactjs";
-import { linkResolver } from "../config/prismic";
+
+import {linkResolver} from "../config/prismic";
 
 const Container = styled.div`
-  margin-top: ${({ theme }) => theme.fontSizes[8]};
-  padding-top: ${({ theme }) => theme.fontSizes[8]};
-  border-top: ${({ theme }) => theme.border} solid
-    ${({ theme }) => theme.colors.purple};
+  margin-top: ${({theme}) => theme.fontSizes[8]};
+  padding-top: ${({theme}) => theme.fontSizes[8]};
+  border-top: ${({theme}) => theme.border} solid
+    ${({theme}) => theme.colors.purple};
 `;
 
 const Figure = styled.figure`
   margin: 0;
-  margin-bottom: ${({ theme }) => theme.fontSizes[6]};
+  margin-bottom: ${({theme}) => theme.fontSizes[6]};
   font-style: italic;
 
   p {
@@ -21,20 +21,18 @@ const Figure = styled.figure`
   }
 `;
 
-const ImageGallery = ({ items }) => {
+const ImageGallery = ({items}) => {
   return (
     <Container>
       {items.map(({ caption, image }, index) => (
-        <LazyLoad once>
-          <Figure key={index}>
-            <img src={image.url} alt={image.alt} key={image.alt} />
-            {caption && (
-              <figcaption>
-                <RichText render={caption} linkResolver={linkResolver} />
-              </figcaption>
-            )}
-          </Figure>
-        </LazyLoad>
+        <Figure key={index}>
+        <img src={image.url} alt={image.alt} key={image.alt} />
+        {caption && (
+          <figcaption>
+          <RichText render={caption} linkResolver={linkResolver} />
+          </figcaption>
+        )}
+        </Figure>
       ))}
     </Container>
   );
