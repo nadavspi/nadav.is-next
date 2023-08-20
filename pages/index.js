@@ -40,7 +40,7 @@ const Home = ({ doc, navigation }) => (
         <ul>
           <li>
             <Link href="/photography">
-              <a href="/photography">Photographer</a>
+              Photographer
             </Link>
           </li>
           <li>Queer</li>
@@ -49,7 +49,7 @@ const Home = ({ doc, navigation }) => (
           <li>Israeli &amp; American &amp; neither </li>
           <li>
             <Link href="/reading">
-              <a href="/reading">Reader</a>
+              Reader
             </Link>
           </li>
           <li>
