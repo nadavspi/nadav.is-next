@@ -40,7 +40,7 @@ const Home = ({ doc, navigation }) => (
         <p>I am...</p>
         <ul>
           <li>
-            <Link href="/photography">Photographer</Link>
+            <Link href="/photography/artists">Photographer</Link>
           </li>
           <li>Queer</li>
           <li>Computer geek</li>
