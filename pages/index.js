@@ -1,11 +1,12 @@
-import Container from "../components/Container";
 import Head from "next/head";
 import Link from "next/link";
+import { RichText } from "prismic-reactjs";
+import styled from "styled-components";
+
+import Container from "../components/Container";
 import Navigation from "../components/Navigation";
 import htmlSerializer from "../config/htmlSerializer";
-import styled from "styled-components";
 import { Client } from "../config/prismic";
-import { RichText } from "prismic-reactjs";
 import { mq } from "../config/theme";
 
 const Main = styled.main`
@@ -39,23 +40,21 @@ const Home = ({ doc, navigation }) => (
         <p>I am...</p>
         <ul>
           <li>
-            <Link href="/photography">
-              Photographer
-            </Link>
+            <Link href="/photography">Photographer</Link>
           </li>
           <li>Queer</li>
           <li>Computer geek</li>
-          <li>Jazz fan &amp; (formerly professional) musician</li>
+          <li>Jazz fan & amp; (formerly professional) musician</li>
           <li>Israeli &amp; American &amp; neither </li>
           <li>
-            <Link href="/reading">
-              Reader
-            </Link>
+            <Link href="/reading">Reader</Link>
           </li>
           <li>
             Student
             <ul>
-              <li>Mandarin Chinese</li>
+              <li>
+                <Link href="/watching">Mandarin Chinese</Link>
+              </li>
               <li>History of the AIDS epidemic</li>
               <li>Psychology</li>
               <li>Meditation</li>
@@ -74,7 +73,7 @@ const Home = ({ doc, navigation }) => (
               <li>Watches</li>
             </ul>
           </li>
-          <li>D&amp;D player</li>
+          <li>D & amp; D player</li>
           <li>Polyamorous</li>
           <li>Coffee aficionado</li>
           <li>Darkroom printer</li>
