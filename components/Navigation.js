@@ -1,8 +1,5 @@
 import Link from "next/link";
-import htmlSerializer from "../config/htmlSerializer";
 import styled from "styled-components";
-import { Client, linkResolver, hrefResolver } from "../config/prismic";
-import { RichText } from "prismic-reactjs";
 
 const Container = styled.div`
   ${({ home, theme }) =>
@@ -17,7 +14,7 @@ const Container = styled.div`
 const Name = styled.h1`
   margin: 0;
   margin-bottom: 0.2rem;
-  font-size: ${props => props.theme.fontSizes[5]};
+  font-size: ${(props) => props.theme.fontSizes[5]};
 `;
 
 const Nav = styled.nav`
@@ -26,30 +23,30 @@ const Nav = styled.nav`
 
 const Item = styled.span`
   display: inline-block;
-  margin: ${props =>
+  margin: ${(props) =>
     props.home
       ? props.theme.fontSizes[2]
       : `0 ${props.theme.fontSizes[2]} 0 0`};
 `;
 
 export default function Navigation({ doc, home }) {
-  const { links } = doc.data;
+  const links = [
+    { text: "Photography", href: "/photography/artists" },
+    { text: "Reading", href: "/reading" },
+    { text: "Watching", href: "/watching" },
+  ];
 
   return (
     <Container home={home}>
       {!home && (
         <Name>
-          <Link href="/">
-            Nadav Spiegelman
-          </Link>
+          <Link href="/">Nadav Spiegelman</Link>
         </Name>
       )}
       <Nav>
-        {links.map(group => (
-          <Item key={group.link.id} home={home}>
-            <Link as={linkResolver(group.link)} href={hrefResolver(group.link)}>
-              {RichText.asText(group.text)}
-            </Link>{" "}
+        {links.map((link) => (
+          <Item key={link.href} home={home}>
+            <Link href={link.href}>{link.text}</Link>
           </Item>
         ))}
       </Nav>

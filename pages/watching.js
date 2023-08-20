@@ -40,7 +40,7 @@ export default function Page({ items, navigation }) {
         <title>Watching</title>
       </Head>
       <main>
-        <Navigation doc={navigation} />
+        <Navigation />
         <h1>Chinese Media Log</h1>
         <Items>
           {items.map((item) => (
@@ -63,7 +63,6 @@ export async function getStaticProps({ params, req }) {
   const items = await getItems();
   return {
     props: {
-      navigation,
       items,
     },
   };

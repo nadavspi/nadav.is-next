@@ -40,7 +40,7 @@ const StyledDd = styled.dd`
 
 const Loading = ({ navigation }) => (
   <PageContainer>
-    {navigation && <Navigation doc={navigation} />}
+    {navigation && <Navigation />}
     <main>
       <h3>Loading...</h3>
     </main>
@@ -76,7 +76,7 @@ export default function Book({ navigation }) {
       <Head>
         <title>{book.title}</title>
       </Head>
-      <Navigation doc={navigation} />
+      <Navigation />
       <main>
         <h1>{book.title}</h1>
         <BookInfo>
@@ -103,12 +103,8 @@ export default function Book({ navigation }) {
 }
 
 export async function getStaticProps({ params, req }) {
-  const navigation = await Client(req).getSingle("navigation");
-
   return {
-    props: {
-      navigation,
-    },
+    props: {},
   };
 }
 
