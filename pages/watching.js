@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
+import Filter from "../components/watching/Filter";
 import { getItems } from "../lib/watching";
 
 const Items = styled.ul`
@@ -31,6 +32,9 @@ const English = styled.div`
 const Metadata = styled.div``;
 
 export default function Page({ items, navigation }) {
+  const allFilters = ["Movie", "TV"];
+  const [currentFilter, setFilter] = useState(allFilters);
+
   return (
     <PageContainer>
       <Head>
@@ -39,19 +43,33 @@ export default function Page({ items, navigation }) {
       <main>
         <Navigation />
         <h1>Chinese Media Log</h1>
+        <Filter
+          allFilters={allFilters}
+          currentFilter={currentFilter}
+          setFilter={setFilter}
+        />
         <Items>
-          {items.map((item) => (
-            <Item key={item.slug}>
-              <Title>
-                <Chinese>{item.titleZh}</Chinese>
-                <English>{item.title}</English>
-              </Title>
-              <Metadata>
-                {item.year}, {item.type}
-              </Metadata>
-              <div dangerouslySetInnerHTML={{ __html: item.contentHtml }} />
-            </Item>
-          ))}
+          {items
+            .filter((item) => currentFilter.includes(item.type))
+            .sort((a, b) => {
+              if (a.date < b.date) {
+                return 1;
+              } else {
+                return -1;
+              }
+            })
+            .map((item) => (
+              <Item key={item.slug}>
+                <Title>
+                  <Chinese>{item.titleZh}</Chinese>
+                  <English>{item.title}</English>
+                </Title>
+                <Metadata>
+                  {item.year}, {item.type}
+                </Metadata>
+                <div dangerouslySetInnerHTML={{ __html: item.contentHtml }} />
+              </Item>
+            ))}
         </Items>
       </main>
     </PageContainer>
