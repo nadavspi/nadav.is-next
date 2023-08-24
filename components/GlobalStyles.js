@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import { mq } from "../config/theme";
+import {createGlobalStyle} from "styled-components";
+
+import {mq} from "../config/theme";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -31,6 +32,7 @@ export const GlobalStyle = createGlobalStyle`
 
   img {
     max-width: 100%;
+    height: auto;
   }
 
   h1,
