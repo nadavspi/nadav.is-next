@@ -7,6 +7,9 @@ import PageContainer from "../components/PageContainer";
 import Filter from "../components/watching/Filter";
 import { getItems } from "../lib/watching";
 
+import { allMedia } from 'contentlayer/generated';
+import Item from "../components/watching/Item";
+
 const Items = styled.ul`
   margin: 0;
   margin-top: 2rem;
@@ -14,22 +17,12 @@ const Items = styled.ul`
   list-style: none;
 `;
 
-const Item = styled.li`
+const ItemContainer = styled.li`
   margin-bottom: 3rem;
   padding-bottom: 3rem;
   border-bottom: ${(props) => props.theme.border} solid
     ${(props) => props.theme.colors.mutedorange};
 `;
-
-const Title = styled.h3`
-  margin-bottom: 0;
-`;
-const Chinese = styled.div``;
-const English = styled.div`
-  font-style: italic;
-`;
-
-const Metadata = styled.div``;
 
 export default function Page({ items, navigation }) {
   const allFilters = ["Movie", "TV"];
@@ -49,8 +42,8 @@ export default function Page({ items, navigation }) {
           setFilter={setFilter}
         />
         <Items>
-          {items
-            .filter((item) => currentFilter.includes(item.type))
+          {allMedia
+            .filter((item) => currentFilter.includes(item.category))
             .sort((a, b) => {
               if (a.date < b.date) {
                 return 1;
@@ -58,17 +51,10 @@ export default function Page({ items, navigation }) {
                 return -1;
               }
             })
-            .map((item) => (
-              <Item key={item.slug}>
-                <Title>
-                  <Chinese>{item.titleZh}</Chinese>
-                  <English>{item.title}</English>
-                </Title>
-                <Metadata>
-                  {item.year}, {item.type}
-                </Metadata>
-                <div dangerouslySetInnerHTML={{ __html: item.contentHtml }} />
-              </Item>
+            .map((item, idx) => (
+              <ItemContainer key={idx}>
+                <Item item={item} />
+              </ItemContainer>
             ))}
         </Items>
       </main>

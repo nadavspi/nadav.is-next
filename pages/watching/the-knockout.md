@@ -2,7 +2,7 @@
 title: The Knockout
 titleZh: 狂飙
 date: 20230730
-type: TV
+category: TV
 year: 2023
 ---
 
