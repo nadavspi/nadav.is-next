@@ -2,7 +2,7 @@
 title: Beijing Bicycle
 titleZh: 十七岁的单车
 date: 20230819
-type: Movie
+category: Movie
 year: 2001
 ---
 

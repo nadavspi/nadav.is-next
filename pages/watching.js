@@ -1,11 +1,11 @@
+import Filter from "../components/watching/Filter";
 import Head from "next/head";
-import React, { useState } from "react";
-import styled from "styled-components";
-
+import ItemRenderer from "../components/watching/Item"
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
-import Filter from "../components/watching/Filter";
-import { getItems } from "../lib/watching";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { allMedia } from "contentlayer/generated";
 
 const Items = styled.ul`
   margin: 0;
@@ -14,7 +14,7 @@ const Items = styled.ul`
   list-style: none;
 `;
 
-const Item = styled.li`
+const ItemContainer = styled.li`
   margin-bottom: 3rem;
   padding-bottom: 3rem;
   border-bottom: ${(props) => props.theme.border} solid
@@ -31,9 +31,19 @@ const English = styled.div`
 
 const Metadata = styled.div``;
 
-export default function Page({ items, navigation }) {
+export default function Page({ navigation }) {
   const allFilters = ["Movie", "TV"];
   const [currentFilter, setFilter] = useState(allFilters);
+
+  const items = allMedia
+    .filter((item) => currentFilter.includes(item.category))
+    .sort((a, b) => {
+      if (a.date < b.date) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
 
   return (
     <PageContainer>
@@ -49,38 +59,15 @@ export default function Page({ items, navigation }) {
           setFilter={setFilter}
         />
         <Items>
-          {items
-            .filter((item) => currentFilter.includes(item.type))
-            .sort((a, b) => {
-              if (a.date < b.date) {
-                return 1;
-              } else {
-                return -1;
-              }
-            })
-            .map((item) => (
-              <Item key={item.slug}>
-                <Title>
-                  <Chinese>{item.titleZh}</Chinese>
-                  <English>{item.title}</English>
-                </Title>
-                <Metadata>
-                  {item.year}, {item.type}
-                </Metadata>
-                <div dangerouslySetInnerHTML={{ __html: item.contentHtml }} />
-              </Item>
-            ))}
+          {items.map((item, idx) => {
+            return (
+              <ItemContainer key={idx}>
+                <ItemRenderer item={item} />
+              </ItemContainer>
+            );
+          })}
         </Items>
       </main>
     </PageContainer>
   );
-}
-
-export async function getStaticProps({ params, req }) {
-  const items = await getItems();
-  return {
-    props: {
-      items,
-    },
-  };
 }
