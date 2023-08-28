@@ -12,3 +12,6 @@ Loved the beginning. The unreliable narrator "it was so long ago, who can even r
 
 Great acting from Xia Yu, less so from Ning Jing.
 
+<Grid>
+    <YouTube id="J_PW0BkKzPU" title="In the Heat of the Sun, jealousy scene" />
+</Grid>
