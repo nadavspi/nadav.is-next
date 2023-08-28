@@ -17,7 +17,6 @@ const Item = ({ item }) => {
   const Body = useMDXComponent(item.body.code);
   return (
     <div>
-      <Body />
       <Title>
         <Chinese>{item.titleZh}</Chinese>
         <English>{item.title}</English>
@@ -25,6 +24,7 @@ const Item = ({ item }) => {
       <Metadata>
         {item.year}, {item.type}
       </Metadata>
+      <Body />
     </div>
   );
 };
