@@ -2,6 +2,7 @@ const { withContentlayer } = require("next-contentlayer");
 
 const nextConfig = {
   images: {
+    minimumCacheTTL: 604800,
     remotePatterns: [
       {
         protocol: "https",
