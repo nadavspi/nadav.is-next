@@ -1,6 +1,6 @@
 import Filter from "../components/watching/Filter";
 import Head from "next/head";
-import ItemRenderer from "../components/watching/Item"
+import ItemRenderer from "../components/watching/ItemRenderer"
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
 import React, { useState } from "react";

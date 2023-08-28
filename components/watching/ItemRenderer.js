@@ -1,7 +1,8 @@
+import Grid from "./Grid";
 import React, { useState } from "react";
+import Screenshot from "./Screenshot";
 import styled from "styled-components";
 import { useMDXComponent } from "next-contentlayer/hooks";
-
 
 const Title = styled.h3`
   margin-bottom: 0;
@@ -24,7 +25,7 @@ const Item = ({ item }) => {
       <Metadata>
         {item.year}, {item.type}
       </Metadata>
-      <Body />
+      <Body components={{ Grid, Screenshot }} />
     </div>
   );
 };
