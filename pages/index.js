@@ -1,13 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
-import {RichText} from "prismic-reactjs";
+import { RichText } from "prismic-reactjs";
 import styled from "styled-components";
 
 import Container from "../components/Container";
 import Navigation from "../components/Navigation";
 import htmlSerializer from "../config/htmlSerializer";
-import {Client} from "../config/prismic";
-import {mq} from "../config/theme";
+import { Client } from "../config/prismic";
+import { mq } from "../config/theme";
 
 const Main = styled.main`
   display: flex;
@@ -28,49 +28,63 @@ const HomeContainer = styled.div`
   padding: 2rem;
 `;
 
-const Home = ({doc, navigation}) => (
-    <><Head><title>Nadav Spiegelman</title>
+const Home = ({ doc, navigation }) => (
+  <>
+    <Head>
+      <title>Nadav Spiegelman</title>
     </Head>
 
-        <Main><HomeContainer>
+    <Main>
+      <Navigation home />
+      <HomeContainer>
         <h2>My name is Nadav Spiegelman.</h2>
-        <p>I am...</p><ul><li>
-        <Link href = "/photography/artists">Photographer</Link>
+        <p>I am...</p>
+        <ul>
+          <li>
+            <Link href="/photography/artists">Photographer</Link>
           </li>
-        <li>Queer</li>
-          <li>Computer geek</li><li>Jazz fan &amp;
-    (formerly professional)
-        musician</li>
+          <li>Queer</li>
+          <li>Computer geek</li>
+          <li>Jazz fan &amp; (formerly professional) musician</li>
           <li>Israeli &amp; American &amp; neither </li>
-    <li><Link href = "/reading">Reader</Link>
-          </li><li>Student<ul><li>
-    <Link href = "/watching">Mandarin Chinese</Link>
+          <li>
+            <Link href="/reading">Reader</Link>
+          </li>
+          <li>
+            Student
+            <ul>
+              <li>
+                <Link href="/watching">Mandarin Chinese</Link>
               </li>
-    <li>History of the AIDS epidemic</li>
+              <li>History of the AIDS epidemic</li>
               <li>Psychology</li>
-    <li>Meditation</li>
+              <li>Meditation</li>
               <li>Buddhisms</li>
-    <li>Yoga</li>
-            </ul></li>
-          <li>Diarist</li><li>Cook<
-        /li>
+              <li>Yoga</li>
+            </ul>
+          </li>
+          <li>Diarist</li>
+          <li>Cook</li>
           <li>
             Collector
             <ul>
               <li>Fountain pens</li>
-    <li>Photo books</li>
+              <li>Photo books</li>
               <li>Tea</li>
-    <li>Watches</li>
-            </ul></li>
+              <li>Watches</li>
+            </ul>
+          </li>
           <li>D&amp;D player</li>
-    <li>Polyamorous</li>
+          <li>Polyamorous</li>
           <li>Coffee aficionado</li>
-    <li>Darkroom printer</li>
+          <li>Darkroom printer</li>
           <li>Picture framer</li>
-    <li>Note taker</li>
+          <li>Note taker</li>
           <li>Fan of bulleted lists</li>
-    </ul>
-      </HomeContainer><Navigation home /></Main>
-  </>);
+        </ul>
+      </HomeContainer>
+    </Main>
+  </>
+);
 
-        export default Home;
+export default Home;
