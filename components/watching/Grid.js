@@ -5,10 +5,10 @@ import { mq } from "../../config/theme";
 const Container = styled.div`
   display: grid;
   grid-gap: 1rem;
-  max-width: 100%;
+  grid-template-columns: 1fr;
 
   @media (min-width: ${(props) => mq(props, "large")}) {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
