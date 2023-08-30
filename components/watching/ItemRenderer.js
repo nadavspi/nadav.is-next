@@ -24,7 +24,7 @@ const Item = ({ item }) => {
         <English>{item.title}</English>
       </Title>
       <Metadata>
-        {item.year}, {item.type}
+        {item.year}, {item.category}
       </Metadata>
       <Body components={{ Grid, Screenshot, YouTube }} />
     </div>
