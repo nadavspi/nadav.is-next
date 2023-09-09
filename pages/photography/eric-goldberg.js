@@ -6,7 +6,6 @@ import React from "react";
 import SliceRender from "../../components/SliceRenderer";
 import styled from "styled-components";
 import { Client } from "../../config/prismic";
-import { Date, RichText } from "prismic-reactjs";
 import { mq } from "../../config/theme";
 
 import WipingCloseup from "./eric-goldberg/eric-goldberg-1.jpg";
