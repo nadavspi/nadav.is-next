@@ -1,4 +1,5 @@
 const { withContentlayer } = require("next-contentlayer");
+const { photoLinks } = require("./config/photoLinks");
 
 const nextConfig = {
   images: {
@@ -9,6 +10,15 @@ const nextConfig = {
         hostname: "nadav-website.s3.us-west-001.backblazeb2.com",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/photography",
+        destination: photoLinks[0].href,
+        permanent: false,
+      },
+    ];
   },
 };
 
