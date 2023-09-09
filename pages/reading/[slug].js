@@ -4,7 +4,6 @@ import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import styled from "styled-components";
 import useSWR from "swr";
-import { Client } from "../../config/prismic";
 import { fetcher } from "../../lib/readwise";
 import { formatISO, parseISO } from "date-fns";
 import { getBooks } from "../../lib/readwise";
