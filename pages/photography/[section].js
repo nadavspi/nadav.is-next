@@ -24,7 +24,6 @@ export default function Page({ doc, navigation }) {
       </Head>
       <main>
         <Navigation />
-        <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <SliceRender doc={doc} className="" />
       </main>
