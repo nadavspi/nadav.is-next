@@ -1,3 +1,4 @@
+import EricGoldberg from "./eric-goldberg";
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
@@ -12,6 +13,10 @@ export default function Page({ doc, navigation }) {
   const router = useRouter();
   const { section } = router.query;
 
+  if (section == "eric-goldberg") {
+    return <EricGoldberg />;
+  }
+
   return (
     <PageContainer>
       <Head>
@@ -19,7 +24,6 @@ export default function Page({ doc, navigation }) {
       </Head>
       <main>
         <Navigation />
-        <RichText render={doc.data.heading} linkResolver={linkResolver} />
         <RichText render={doc.data.content} linkResolver={linkResolver} />
         <SliceRender doc={doc} className="" />
       </main>
@@ -43,9 +47,13 @@ export async function getStaticPaths() {
   );
 
   return {
-    paths: sectionNav.items.map((section) => ({
-      params: { section: section.section_id },
-    })),
+    paths: sectionNav.items
+      .filter((section) => {
+        return section.section_id !== "eric-goldberg";
+      })
+      .map((section) => ({
+        params: { section: section.section_id },
+      })),
     fallback: false,
   };
 }
