@@ -2,11 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
+import PhotoNav from "../../components/PhotoNav";
 import React from "react";
-import SliceRender from "../../components/SliceRenderer";
 import styled from "styled-components";
-import { Client } from "../../config/prismic";
-import { Date, RichText } from "prismic-reactjs";
 import { mq } from "../../config/theme";
 
 import WipingCloseup from "./eric-goldberg/eric-goldberg-1.jpg";
@@ -122,7 +120,7 @@ export default function Page({ doc }) {
           <title>Eric Goldberg</title>
         </Head>
         <Navigation />
-        <SliceRender doc={doc} className="" />
+        <PhotoNav />
       </PageContainer>
       <main>
         <Grid>
@@ -136,7 +134,7 @@ export default function Page({ doc }) {
               <time>January 2019</time>
             </h4>
           </Header>
-          <Image src={Portrait} alt="" className="image-1" />
+          <Image src={Portrait} alt="" className="image-1" placeholder="blur" />
           <p className="text text-1">
             I photographed{" "}
             <a href="https://www.ericgoldberg.net/">Eric Goldberg</a> during his{" "}
@@ -150,26 +148,33 @@ export default function Page({ doc }) {
           <p className="text text-2">
             I was in Philly for the{" "}
             <a href="https://phillypenshow.com/">pen show</a>, and I always walk
-            to the Barnes when I&rsquo;m there. It turned out that Eric was into pens
-            too, and was interested in the show. I wonder if he ended up going.
+            to the Barnes when I&rsquo;m there. It turned out that Eric was into
+            pens too, and was interested in the show. I wonder if he ended up
+            going.
           </p>
-          <Image className="image-2" src={WipingCloseup} alt="" />
-          <Image className="image-3" src={Wiping} alt="" />
-          <Image className="image-4" src={Press} alt="" />
-          <Image className="image-5" src={PlateCloseup} alt="" />
-          <Image className="image-6" src={PlateAndPrint} alt="" />
-          <Image className="image-7" src={Prints} alt="" />
+          <Image
+            className="image-2"
+            placeholder="blur"
+            src={WipingCloseup}
+            alt=""
+          />
+          <Image className="image-3" placeholder="blur" src={Wiping} alt="" />
+          <Image className="image-4" placeholder="blur" src={Press} alt="" />
+          <Image
+            className="image-5"
+            placeholder="blur"
+            src={PlateCloseup}
+            alt=""
+          />
+          <Image
+            className="image-6"
+            placeholder="blur"
+            src={PlateAndPrint}
+            alt=""
+          />
+          <Image className="image-7" placeholder="blur" src={Prints} alt="" />
         </Grid>
       </main>
     </div>
   );
-}
-
-export async function getStaticProps({ params, req }) {
-  const doc = await Client(req).getByUID("page", "photography");
-  return {
-    props: {
-      doc,
-    },
-  };
 }
