@@ -3,7 +3,10 @@ import Image from "next/image";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import React from "react";
+import SliceRender from "../../components/SliceRenderer";
 import styled from "styled-components";
+import { Client } from "../../config/prismic";
+import { Date, RichText } from "prismic-reactjs";
 import { mq } from "../../config/theme";
 
 import WipingCloseup from "./eric-goldberg/eric-goldberg-1.jpg";
@@ -111,7 +114,7 @@ const Title = styled.h1`
   margin-bottom: 0;
 `;
 
-export default function Page({ doc, navigation }) {
+export default function Page({ doc }) {
   return (
     <div>
       <PageContainer>
@@ -119,6 +122,7 @@ export default function Page({ doc, navigation }) {
           <title>Eric Goldberg</title>
         </Head>
         <Navigation />
+        <SliceRender doc={doc} className="" />
       </PageContainer>
       <main>
         <Grid>
@@ -159,4 +163,13 @@ export default function Page({ doc, navigation }) {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps({ params, req }) {
+  const doc = await Client(req).getByUID("page", "photography");
+  return {
+    props: {
+      doc,
+    },
+  };
 }
