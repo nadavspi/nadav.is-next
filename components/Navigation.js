@@ -35,13 +35,13 @@ const Item = styled.span`
 `;
 
 export default function Navigation({ doc, home }) {
+  const pathname = usePathname();
   const isActive = (href) => {
-    const pathname = usePathname();
     return pathname.split("/")[1] == href.split("/")[1];
   };
 
   const links = [
-    { text: "Photography", href: "/photography/artists" },
+    { text: "Photography", href: "/photography/eric-goldberg" },
     { text: "Reading", href: "/reading" },
     { text: "Watching", href: "/watching" },
   ];
