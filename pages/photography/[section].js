@@ -47,9 +47,13 @@ export async function getStaticPaths() {
   );
 
   return {
-    paths: sectionNav.items.map((section) => ({
-      params: { section: section.section_id },
-    })),
+    paths: sectionNav.items
+      .filter((section) => {
+        return section.section_id !== "eric-goldberg";
+      })
+      .map((section) => ({
+        params: { section: section.section_id },
+      })),
     fallback: false,
   };
 }
