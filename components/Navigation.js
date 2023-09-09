@@ -41,7 +41,7 @@ export default function Navigation({ doc, home }) {
   };
 
   const links = [
-    { text: "Photography", href: "/photography/eric-goldberg" },
+    { text: "Photography", href: "/photography" },
     { text: "Reading", href: "/reading" },
     { text: "Watching", href: "/watching" },
   ];
