@@ -146,7 +146,7 @@ export default function Page({ doc, navigation }) {
           <p className="text text-2">
             I was in Philly for the{" "}
             <a href="https://phillypenshow.com/">pen show</a>, and I always walk
-            to the Barnes when I'm there. It turned out that Eric was into pens
+            to the Barnes when I&rsquo;m there. It turned out that Eric was into pens
             too, and was interested in the show. I wonder if he ended up going.
           </p>
           <Image className="image-2" src={WipingCloseup} alt="" />
