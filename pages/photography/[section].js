@@ -1,3 +1,4 @@
+import EricGoldberg from "./eric-goldberg";
 import Head from "next/head";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
@@ -11,6 +12,10 @@ import { useRouter } from "next/router";
 export default function Page({ doc, navigation }) {
   const router = useRouter();
   const { section } = router.query;
+
+  if (section == "eric-goldberg") {
+    return <EricGoldberg />;
+  }
 
   return (
     <PageContainer>
