@@ -3,8 +3,6 @@ import Link from "next/link";
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
 import styled from "styled-components";
-import { Client, linkResolver, hrefResolver } from "../config/prismic";
-import { RichText } from "prismic-reactjs";
 import { getBooks } from "../lib/readwise";
 
 const BookList = styled.ul`
@@ -18,13 +16,13 @@ const Book = styled.li`
   margin-bottom: 1.5rem;
 `;
 
-const BookLink = styled.a`
+const BookLink = styled.div`
   display: inline-flex;
   flex-direction: column;
   cursor: pointer;
 `;
 
-const Title = styled.span``;
+const Title = styled.div``;
 const Author = styled.span`
   color: ${(props) => props.theme.colors.primary};
   font-size: ${(props) => props.theme.fontSizes[2]};
@@ -35,26 +33,21 @@ export default function Reading({ doc, navigation, books }) {
   return (
     <PageContainer>
       <Head>
-        <title>{RichText.asText(doc.data.heading)}</title>
+        <title>My Bookshelf</title>
       </Head>
 
       <Navigation />
       <main>
-        <RichText render={doc.data.heading} linkResolver={linkResolver} />
-        <RichText render={doc.data.content} linkResolver={linkResolver} />
+        <h1>My Bookshelf</h1>
         <BookList>
           {books.map((book) => (
             <Book key={book.id}>
-              <Link
-                as={linkResolver({ type: "book", slug: book.slug })}
-                href={hrefResolver({ type: "book" })}
-                legacyBehavior
-              >
-                <BookLink href={`/reading/${book.slug}`}>
+              <BookLink>
+                <Link href={`/reading/${book.slug}`}>
                   <Title>{book.title}</Title>
                   <Author>by {book.author}</Author>
-                </BookLink>
-              </Link>
+                </Link>
+              </BookLink>
             </Book>
           ))}
         </BookList>
@@ -64,11 +57,9 @@ export default function Reading({ doc, navigation, books }) {
 }
 
 export async function getStaticProps({ params, req }) {
-  const doc = await Client(req).getSingle("books");
   const books = await getBooks();
   return {
     props: {
-      doc,
       books: books.results,
     },
     revalidate: 3600,

@@ -1,12 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
-import { RichText } from "prismic-reactjs";
 import styled from "styled-components";
 
 import Container from "../components/Container";
 import Navigation from "../components/Navigation";
-import htmlSerializer from "../config/htmlSerializer";
-import { Client } from "../config/prismic";
 import { mq } from "../config/theme";
 
 const Main = styled.main`
