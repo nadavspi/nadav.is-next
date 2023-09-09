@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { usePathname } from "next/navigation";
 
 const Container = styled.div`
   ${({ home, theme }) =>
@@ -9,6 +10,10 @@ const Container = styled.div`
     padding-bottom: 0.5rem;
     border-bottom: ${theme.border} solid ${theme.colors.purple};
 `}
+
+  .active {
+    color: ${(props) => props.theme.colors.cyan};
+  }
 `;
 
 const Name = styled.h1`
@@ -30,6 +35,11 @@ const Item = styled.span`
 `;
 
 export default function Navigation({ doc, home }) {
+  const isActive = (href) => {
+    const pathname = usePathname();
+    return pathname.split("/")[1] == href.split("/")[1];
+  };
+
   const links = [
     { text: "Photography", href: "/photography/artists" },
     { text: "Reading", href: "/reading" },
@@ -44,11 +54,16 @@ export default function Navigation({ doc, home }) {
         </Name>
       )}
       <Nav>
-        {links.map((link) => (
-          <Item key={link.href} home={home}>
-            <Link href={link.href}>{link.text}</Link>
-          </Item>
-        ))}
+        {links.map((link) => {
+          const className = isActive(link.href) ? "active" : "";
+          return (
+            <Item key={link.href} home={home}>
+              <Link href={link.href} className={className}>
+                {link.text}
+              </Link>
+            </Item>
+          );
+        })}
       </Nav>
     </Container>
   );
