@@ -37,7 +37,8 @@ export const GlobalStyle = createGlobalStyle`
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     margin-top: 0;
     margin-bottom: 1rem;
     line-height: 1.3;
@@ -61,6 +62,15 @@ export const GlobalStyle = createGlobalStyle`
     font-size: ${props => props.theme.fontSizes[4]};
     @media (min-width: ${props => mq(props)}) {
       font-size: ${props => props.theme.fontSizes[6]};
+    }
+  }
+
+  h4 {
+    font-size: ${props => props.theme.fontSizes[3]};
+    font-weight: normal;
+
+    @media (min-width: ${props => mq(props)}) {
+      font-size: ${props => props.theme.fontSizes[4]};
     }
   }
 
