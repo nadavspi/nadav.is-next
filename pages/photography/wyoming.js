@@ -168,12 +168,13 @@ export default function Page({ doc }) {
         <Grid>
           {images.map((image) => (
             <Image
-              key={image.id}
               alt={image.alt}
+              className={image.className}
+              key={image.id}
               placeholder="blur"
+              sizes="100vw"
               src={image.src}
               style={{ gridArea: image.id }}
-              className={image.className}
             />
           ))}
         </Grid>

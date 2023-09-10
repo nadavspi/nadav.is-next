@@ -134,7 +134,13 @@ export default function Page({ doc }) {
               <time>January 2019</time>
             </h4>
           </Header>
-          <Image src={Portrait} alt="" className="image-1" placeholder="blur" />
+          <Image
+            sizes="100vw"
+            src={Portrait}
+            alt=""
+            className="image-1"
+            placeholder="blur"
+          />
           <p className="text text-1">
             I photographed{" "}
             <a href="https://www.ericgoldberg.net/">Eric Goldberg</a> during his{" "}
@@ -153,26 +159,47 @@ export default function Page({ doc }) {
             going.
           </p>
           <Image
+            sizes="100vw"
             className="image-2"
             placeholder="blur"
             src={WipingCloseup}
             alt=""
           />
-          <Image className="image-3" placeholder="blur" src={Wiping} alt="" />
-          <Image className="image-4" placeholder="blur" src={Press} alt="" />
           <Image
+            sizes="100vw"
+            className="image-3"
+            placeholder="blur"
+            src={Wiping}
+            alt=""
+          />
+          <Image
+            sizes="100vw"
+            className="image-4"
+            placeholder="blur"
+            src={Press}
+            alt=""
+          />
+          <Image
+            sizes="100vw"
             className="image-5"
             placeholder="blur"
             src={PlateCloseup}
             alt=""
           />
           <Image
+            sizes="100vw"
             className="image-6"
             placeholder="blur"
             src={PlateAndPrint}
             alt=""
           />
-          <Image className="image-7" placeholder="blur" src={Prints} alt="" />
+          <Image
+            sizes="100vw"
+            className="image-7"
+            placeholder="blur"
+            src={Prints}
+            alt=""
+          />
         </Grid>
       </main>
     </div>

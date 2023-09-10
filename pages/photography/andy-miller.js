@@ -171,6 +171,7 @@ export default function Page({ doc }) {
             </h4>
           </Header>
           <Image
+            sizes="100vw"
             src={Kitchen}
             alt="Portrait of Andy in his kitchen"
             className="photo-kitchen"
@@ -188,6 +189,7 @@ export default function Page({ doc }) {
             2023 surrounded by friends.
           </p>
           <Image
+            sizes="100vw"
             src={Outside}
             alt="Andy outside of his home with Esmeralda"
             className="photo-outside"
@@ -195,24 +197,28 @@ export default function Page({ doc }) {
           />
 
           <Image
+            sizes="100vw"
             src={StudioPortrait}
             alt="Andy in his studio"
             className="photo-studio-portrait vertical"
             placeholder="blur"
           />
           <Image
+            sizes="100vw"
             src={CinderBlocks}
             alt="An in-progress painting resting on cinderblocks"
             className="photo-cinderblocks vertical"
             placeholder="blur"
           />
           <Image
+            sizes="100vw"
             src={Storage}
             alt="Stacks of paintings"
             className="photo-storage vertical"
             placeholder="blur"
           />
           <Image
+            sizes="100vw"
             src={GardenPortrait}
             alt="Andy in his garden"
             className="photo-garden vertical"
@@ -237,7 +243,14 @@ export default function Page({ doc }) {
               holds exhibits in the building.
             </p>
           </div>
-          <Image src={Poem} alt="" className="photo-poem vertical" placeholder="blur" />
+          <Image
+            sizes="100vw"
+            src={Poem}
+            alt=""
+            className="photo-poem vertical"
+            placeholder="blur"
+          />
+
           <TextPoem>
             in the painting room
             <br />
