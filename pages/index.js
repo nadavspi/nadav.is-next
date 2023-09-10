@@ -1,87 +1,125 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
+import Navigation from "../components/Navigation";
+import PageContainer from "../components/PageContainer";
 import styled from "styled-components";
 
-import Container from "../components/Container";
-import Navigation from "../components/Navigation";
-import { mq } from "../config/theme";
+import Welcome from "./home/welcome.gif";
+import WatchingGrid from "../components/watching/Grid";
+import Screenshot from "../components/watching/Screenshot";
+import Spaceship from "./photography/wyoming/wyoming-100.jpg";
+import Andy from "./photography/andy-miller/andy-miller-101.jpg";
+import Eric from "./photography/eric-goldberg/eric-goldberg-7.jpg";
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  max-width: 40em;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  align-items: center;
-
-  @media (min-width: ${(props) => mq(props)}) {
-    justify-content: center;
-  }
+const Section = styled.section`
+  margin-top: 4rem;
+`;
+const Photos = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "Spaceship Eric"
+    "Spaceship Andy";
+`;
+const Parenthetical = styled.h4`
+  margin-top: 1rem;
+  max-width: 30rem;
 `;
 
-const HomeContainer = styled.div`
-  border: 1rem solid ${(props) => props.theme.colors.purple};
-  padding: 2rem;
-`;
+const About = ({ doc, navigation }) => {
+  const photos = [
+    {
+      alt: "A church that looks like a weird spaceship",
+      id: "Spaceship",
+      src: Spaceship,
+      href: "/photography/wyoming",
+    },
+    {
+      id: "Andy",
+      alt: "Portrait of Andy Miller in his kitchen",
+      src: Andy,
+      href: "/photography/andy-miller",
+    },
+    {
+      id: "Eric",
+      src: Eric,
+      alt: "Portrait of Eric Goldberg",
+      href: "/photography/eric-goldberg",
+    },
+  ];
 
-const Home = ({ doc, navigation }) => (
-  <>
-    <Head>
-      <title>Nadav Spiegelman</title>
-    </Head>
+  return (
+    <PageContainer>
+      <Head>
+        <title>Who?</title>
+      </Head>
 
-    <Main>
-      <Navigation home />
-      <HomeContainer>
-        <h2>My name is Nadav Spiegelman.</h2>
-        <p>I am...</p>
-        <ul>
-          <li>
-            <Link href="/photography/artists">Photographer</Link>
-          </li>
-          <li>Queer</li>
-          <li>Computer geek</li>
-          <li>Jazz fan &amp; (formerly professional) musician</li>
-          <li>Israeli &amp; American &amp; neither </li>
-          <li>
-            <Link href="/reading">Reader</Link>
-          </li>
-          <li>
-            Student
-            <ul>
-              <li>
-                <Link href="/watching">Mandarin Chinese</Link>
-              </li>
-              <li>History of the AIDS epidemic</li>
-              <li>Psychology</li>
-              <li>Meditation</li>
-              <li>Buddhisms</li>
-              <li>Yoga</li>
-            </ul>
-          </li>
-          <li>Diarist</li>
-          <li>Cook</li>
-          <li>
-            Collector
-            <ul>
-              <li>Fountain pens</li>
-              <li>Photo books</li>
-              <li>Tea</li>
-              <li>Watches</li>
-            </ul>
-          </li>
-          <li>D&amp;D player</li>
-          <li>Polyamorous</li>
-          <li>Coffee aficionado</li>
-          <li>Darkroom printer</li>
-          <li>Picture framer</li>
-          <li>Note taker</li>
-          <li>Fan of bulleted lists</li>
-        </ul>
-      </HomeContainer>
-    </Main>
-  </>
-);
+      <main>
+        <Navigation />
 
-export default Home;
+        <Image src={Welcome} alt="Welcome to my Homepage!" />
+        <Parenthetical>
+          (I don&rsquo;t remember what my first website looked like, but
+          it <em>probably</em> had something like that.)
+        </Parenthetical>
+
+        <Section>
+          <Link href="/photography">
+            <h3>My photography</h3>
+          </Link>
+          <Photos>
+            {photos.map((image) => (
+              <Link
+                href={image.href}
+                key={image.id}
+                style={{ gridArea: image.id }}
+              >
+                <Image
+                  alt={image.alt}
+                  placeholder="blur"
+                  sizes="50vw"
+                  src={image.src}
+                />
+              </Link>
+            ))}
+          </Photos>
+        </Section>
+
+        <Section>
+          <Link href="/watching">
+            <h3>Things I&rsquo;m watching</h3>
+          </Link>
+          <WatchingGrid>
+            <Link href="/watching">
+              <Screenshot
+                src="still-life/Still Life (2006) 01:38:25.jpg"
+                alt="Couple in half-demolished building"
+              />
+            </Link>
+            <Link href="/watching">
+              <Screenshot
+                src="dearest/Dearest (2014) 01:18:06.jpg"
+                alt="Construction workers' dorm"
+                width="1920"
+                height="816"
+              />
+            </Link>
+          </WatchingGrid>
+        </Section>
+
+        <Section>
+          <Link href="/reading">
+            <h3 style={{ marginBottom: 0 }}>Things I&rsquo;m reading</h3>
+          </Link>
+          <Parenthetical>
+            (but also not really because a lot of my reading these days is in
+            Chinese which isn&rsquo;t represented here)
+          </Parenthetical>
+        </Section>
+      </main>
+    </PageContainer>
+  );
+};
+
+export default About;
