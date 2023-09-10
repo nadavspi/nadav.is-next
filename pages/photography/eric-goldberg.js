@@ -136,6 +136,7 @@ export default function Page({ doc }) {
           </Header>
           <Image
             sizes="100vw"
+            priority="true"
             src={Portrait}
             alt=""
             className="image-1"
@@ -160,6 +161,7 @@ export default function Page({ doc }) {
           </p>
           <Image
             sizes="100vw"
+            priority="true"
             className="image-2"
             placeholder="blur"
             src={WipingCloseup}
@@ -167,6 +169,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             className="image-3"
             placeholder="blur"
             src={Wiping}
@@ -174,6 +177,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             className="image-4"
             placeholder="blur"
             src={Press}
@@ -181,6 +185,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             className="image-5"
             placeholder="blur"
             src={PlateCloseup}
@@ -188,6 +193,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             className="image-6"
             placeholder="blur"
             src={PlateAndPrint}
@@ -195,6 +201,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             className="image-7"
             placeholder="blur"
             src={Prints}
