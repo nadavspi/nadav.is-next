@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
 import PageContainer from "../components/PageContainer";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Welcome from "./home/welcome.gif";
+import WelcomeStatic from "./home/welcome-static.gif";
 import WatchingGrid from "../components/watching/Grid";
 import Screenshot from "../components/watching/Screenshot";
 import Spaceship from "./photography/wyoming/wyoming-100.jpg";
@@ -28,6 +30,8 @@ const Parenthetical = styled.h4`
 `;
 
 const About = ({ doc, navigation }) => {
+  const [animationDisabled, setAnimationDisabled] = useState(false);
+
   const photos = [
     {
       alt: "A church that looks like a weird spaceship",
@@ -52,16 +56,26 @@ const About = ({ doc, navigation }) => {
   return (
     <PageContainer>
       <Head>
-        <title>Who?</title>
+        <title>Nadav Spiegelman</title>
       </Head>
 
       <main>
         <Navigation />
 
-        <Image src={Welcome} alt="Welcome to my Homepage!" />
+        <Image
+          src={animationDisabled ? WelcomeStatic : Welcome}
+          alt="Welcome to my Homepage!"
+        />
+        <button
+          type="button"
+          onClick={() => setAnimationDisabled(!animationDisabled)}
+        >
+          {animationDisabled ? "Enable" : "Disable"} animation
+        </button>
+
         <Parenthetical>
-          (I don&rsquo;t remember what my first website looked like, but
-          it <em>probably</em> had something like that.)
+          (I don&rsquo;t remember what my first website looked like, but it{" "}
+          <em>probably</em> had something like that.)
         </Parenthetical>
 
         <Section>
