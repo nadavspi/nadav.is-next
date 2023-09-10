@@ -122,13 +122,13 @@ const About = ({ doc, navigation }) => {
             <Link href="/watching">
               <Screenshot
                 src="still-life/Still Life (2006) 01:38:25.jpg"
-                alt="Couple in half-demolished building"
+                alt="Still Life"
               />
             </Link>
             <Link href="/watching">
               <Screenshot
                 src="dearest/Dearest (2014) 01:18:06.jpg"
-                alt="Construction workers' dorm"
+                alt="Dearest"
                 width="1920"
                 height="816"
               />
