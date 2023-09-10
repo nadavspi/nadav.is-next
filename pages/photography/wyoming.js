@@ -168,6 +168,7 @@ export default function Page({ doc }) {
         <Grid>
           {images.map((image) => (
             <Image
+              priority={true}
               alt={image.alt}
               className={image.className}
               key={image.id}

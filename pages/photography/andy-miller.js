@@ -172,6 +172,7 @@ export default function Page({ doc }) {
           </Header>
           <Image
             sizes="100vw"
+            priority="true"
             src={Kitchen}
             alt="Portrait of Andy in his kitchen"
             className="photo-kitchen"
@@ -190,6 +191,7 @@ export default function Page({ doc }) {
           </p>
           <Image
             sizes="100vw"
+            priority="true"
             src={Outside}
             alt="Andy outside of his home with Esmeralda"
             className="photo-outside"
@@ -198,6 +200,7 @@ export default function Page({ doc }) {
 
           <Image
             sizes="100vw"
+            priority="true"
             src={StudioPortrait}
             alt="Andy in his studio"
             className="photo-studio-portrait vertical"
@@ -205,6 +208,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             src={CinderBlocks}
             alt="An in-progress painting resting on cinderblocks"
             className="photo-cinderblocks vertical"
@@ -212,6 +216,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             src={Storage}
             alt="Stacks of paintings"
             className="photo-storage vertical"
@@ -219,6 +224,7 @@ export default function Page({ doc }) {
           />
           <Image
             sizes="100vw"
+            priority="true"
             src={GardenPortrait}
             alt="Andy in his garden"
             className="photo-garden vertical"
@@ -245,6 +251,7 @@ export default function Page({ doc }) {
           </div>
           <Image
             sizes="100vw"
+            priority="true"
             src={Poem}
             alt=""
             className="photo-poem vertical"
