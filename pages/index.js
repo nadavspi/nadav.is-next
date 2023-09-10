@@ -14,8 +14,14 @@ import Spaceship from "./photography/wyoming/wyoming-100.jpg";
 import Andy from "./photography/andy-miller/andy-miller-101.jpg";
 import Eric from "./photography/eric-goldberg/eric-goldberg-7.jpg";
 
+const Intro = styled.header`
+  max-width: 40rem;
+  margin-bottom: 2rem;
+`;
 const Section = styled.section`
-  margin-top: 4rem;
+  &:not(:first-child) {
+    margin-bottom: 4rem;
+  }
 `;
 const Photos = styled.div`
   display: grid;
@@ -62,21 +68,29 @@ const About = ({ doc, navigation }) => {
       <main>
         <Navigation />
 
-        <Image
-          src={animationDisabled ? WelcomeStatic : Welcome}
-          alt="Welcome to my Homepage!"
-        />
-        <button
-          type="button"
-          onClick={() => setAnimationDisabled(!animationDisabled)}
-        >
-          {animationDisabled ? "Enable" : "Disable"} animation
-        </button>
+        <Intro>
+          <Image
+            src={animationDisabled ? WelcomeStatic : Welcome}
+            alt="Welcome to my Homepage!"
+          />
+          <button
+            type="button"
+            onClick={() => setAnimationDisabled(!animationDisabled)}
+          >
+            {animationDisabled ? "Enable" : "Disable"} animation
+          </button>
 
-        <Parenthetical>
-          (I don&rsquo;t remember what my first website looked like, but it{" "}
-          <em>probably</em> had something like that.)
-        </Parenthetical>
+          <Parenthetical>
+            (I don&rsquo;t remember what my first website looked like, but it{" "}
+            <em>probably</em> had something like that.)
+          </Parenthetical>
+          <p>
+            Anyway. This is my personal website, an online journal — a web log,
+            if you will — for sharing some of the things I&rsquo;m thinking
+            about or working on.
+          </p>
+          <p>You&rsquo;ll find things such as:</p>
+        </Intro>
 
         <Section>
           <Link href="/photography">
