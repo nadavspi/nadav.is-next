@@ -66,7 +66,7 @@ const Grid = styled.div`
   }
 
   img {
-    aspect-ratio: 5/41
+    aspect-ratio: 5/4;
     object-fit: contain;
     width: 100%;
   }
