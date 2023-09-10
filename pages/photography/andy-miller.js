@@ -57,7 +57,9 @@ const Grid = styled.div`
       "text-esmeralda photo-outside photo-outside photo-outside"
       "photo-studio-portrait photo-studio-portrait photo-cinderblocks photo-cinderblocks"
       "photo-storage photo-storage photo-garden photo-garden"
+      ". . . ."
       ".. text-milton text-milton .."
+      ". . . ."
       "photo-poem photo-poem text-poem text-poem";
 
     .text {
@@ -69,6 +71,9 @@ const Grid = styled.div`
     aspect-ratio: 5/4;
     object-fit: contain;
     width: 100%;
+  }
+  .vertical {
+    aspect-ratio: 4 / 5;
   }
   p {
     margin: 0;
@@ -192,25 +197,25 @@ export default function Page({ doc }) {
           <Image
             src={StudioPortrait}
             alt="Andy in his studio"
-            className="photo-studio-portrait"
+            className="photo-studio-portrait vertical"
             placeholder="blur"
           />
           <Image
             src={CinderBlocks}
             alt="An in-progress painting resting on cinderblocks"
-            className="photo-cinderblocks"
+            className="photo-cinderblocks vertical"
             placeholder="blur"
           />
           <Image
             src={Storage}
             alt="Stacks of paintings"
-            className="photo-storage"
+            className="photo-storage vertical"
             placeholder="blur"
           />
           <Image
             src={GardenPortrait}
             alt="Andy in his garden"
-            className="photo-garden"
+            className="photo-garden vertical"
             placeholder="blur"
           />
           <div className="text-milton">
@@ -232,7 +237,7 @@ export default function Page({ doc }) {
               holds exhibits in the building.
             </p>
           </div>
-          <Image src={Poem} alt="" className="photo-poem" placeholder="blur" />
+          <Image src={Poem} alt="" className="photo-poem vertical" placeholder="blur" />
           <TextPoem>
             in the painting room
             <br />
