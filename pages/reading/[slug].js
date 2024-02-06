@@ -3,10 +3,9 @@ import Highlights from "../../components/Highlights";
 import Navigation from "../../components/Navigation";
 import PageContainer from "../../components/PageContainer";
 import styled from "styled-components";
-import useSWR from "swr";
 import { fetcher } from "../../lib/readwise";
 import { formatISO, parseISO } from "date-fns";
-import { getBooks } from "../../lib/readwise";
+import { getBooks, getBook } from "../../lib/readwise";
 import { useRouter } from "next/router";
 
 const BookInfo = styled.section`
@@ -46,17 +45,13 @@ const Loading = ({ navigation }) => (
   </PageContainer>
 );
 
-export default function Book({ navigation }) {
+export default function Book({ navigation, book, lastHighlightDate }) {
   const router = useRouter();
-  const { slug } = router.query;
-
-  const { data: book, error } = useSWR(`/api/books/${slug}`, fetcher);
-
-  if (!slug || router.isFallback) {
+  if (router.isFallback) {
     return <Loading navigation={navigation} />;
   }
 
-  if (error || (book && book.error)) {
+  if (book && book.error) {
     return (
       <PageContainer>
         <main>
@@ -83,37 +78,41 @@ export default function Book({ navigation }) {
             <StyledDt>Author</StyledDt>
             <StyledDd>{book.author}</StyledDd>
             <StyledDt>My last highlight</StyledDt>
-            <StyledDd>
-              {formatISO(parseISO(book.last_highlight_at), {
-                representation: "date",
-              })}
-            </StyledDd>
+            <StyledDd>{lastHighlightDate}</StyledDd>
             <StyledDt>Number of highlights</StyledDt>
-            <StyledDd>{book.num_highlights || "0"}</StyledDd>
+            <StyledDd>{book.highlights.length}</StyledDd>
           </Metadata>
           {!book.cover_image_url.includes("default-book") && (
             <CoverImage src={book.cover_image_url} alt="" />
           )}
         </BookInfo>
-        <Highlights book={book} />
+        <Highlights highlights={book.highlights} />
       </main>
     </PageContainer>
   );
 }
 
 export async function getStaticProps({ params, req }) {
+  const book = await getBook(params.slug);
+  const lastHighlight =
+    book.highlights[book.highlights.length - 1].highlighted_at;
   return {
-    props: {},
+    props: {
+      book,
+      lastHighlightDate: formatISO(parseISO(lastHighlight), {
+        representation: "date",
+      }),
+    },
   };
 }
 
 export async function getStaticPaths() {
-  const books = await getBooks(5);
+  const books = await getBooks();
 
   return {
-    paths: books.results.map((book) => ({
-      params: { slug: `${book.id}` },
+    paths: books.map((book) => ({
+      params: { slug: `${book.slug}` },
     })),
-    fallback: true,
+    fallback: false,
   };
 }

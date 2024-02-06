@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useSWR from "swr";
 import { fetcher } from "../lib/readwise";
 import { mq } from "../config/theme";
 
@@ -34,31 +33,11 @@ const HighlightsSection = styled.section`
   max-width: 36em;
 `;
 
-const Highlights = ({ book }) => {
-  const { data: highlights, error } = useSWR(
-    `/api/books/highlights/${book.id}`,
-    fetcher,
-  );
-  if (!book) return null;
-  if (book.num_highlights == 0) {
-    return;
-  }
-
-  if (error) return nulll;
-
-  if (!highlights) {
-    return (
-      <HighlightsSection>
-        <h2>My Highlights</h2>
-        Loading...
-      </HighlightsSection>
-    );
-  }
-
+const Highlights = ({ highlights }) => {
   return (
     <HighlightsSection>
       <h2>My Highlights</h2>
-      {highlights.results.map((highlight) => (
+      {highlights.map((highlight) => (
         <Quote key={highlight.id}>{highlight.text}</Quote>
       ))}
     </HighlightsSection>
