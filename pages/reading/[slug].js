@@ -45,7 +45,11 @@ const Loading = ({ navigation }) => (
   </PageContainer>
 );
 
-export default function Book({ navigation, book, lastHighlightDate }) {
+export default function Book({
+  navigation,
+  book = {},
+  lastHighlightDate = "",
+}) {
   const router = useRouter();
   if (router.isFallback) {
     return <Loading navigation={navigation} />;
@@ -110,9 +114,11 @@ export async function getStaticPaths() {
   const books = await getBooks();
 
   return {
-    paths: books.map((book) => ({
-      params: { slug: `${book.slug}` },
-    })),
+    paths: books
+      .filter((book) => book.slug)
+      .map(({ slug }) => ({
+        params: { slug },
+      })),
     fallback: false,
   };
 }

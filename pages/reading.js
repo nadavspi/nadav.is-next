@@ -29,7 +29,7 @@ const Author = styled.span`
   font-style: normal;
 `;
 
-export default function Reading({ doc, navigation, books }) {
+export default function Reading({ navigation, books = [] }) {
   return (
     <PageContainer>
       <Head>

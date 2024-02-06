@@ -33,7 +33,7 @@ const HighlightsSection = styled.section`
   max-width: 36em;
 `;
 
-const Highlights = ({ highlights }) => {
+const Highlights = ({ highlights = [] }) => {
   return (
     <HighlightsSection>
       <h2>My Highlights</h2>
