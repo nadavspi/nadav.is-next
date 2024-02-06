@@ -60,7 +60,7 @@ export async function getStaticProps({ params, req }) {
   const books = await getBooks();
   return {
     props: {
-      books: books.results,
+      books,
     },
     revalidate: 3600,
   };
