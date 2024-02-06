@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { formatISO, parseISO } from "date-fns";
 
 const excludedBooks = (book) => {
   if (book.readable_title === "Instapaper") {
@@ -28,8 +29,19 @@ export const getBooks = async () => {
 
 export const getBook = async (slug) => {
   const all = await fetchAll();
-  return all.find(book => book.slug === slug);
-}
+  return all
+    .find((book) => book.slug === slug)
+    .map((book) => {
+      const { highlights: h } = book;
+      const lastHighlight = h[h.length - 1].highlighted_at;
+      return {
+        ...book,
+        lastHighlightDate: formatISO(parseISO(lastHighlight), {
+          representation: "date",
+        }),
+      };
+    });
+};
 
 export const getHighlights = async (user_book_id) => {
   const all = await fetchAll();

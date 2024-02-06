@@ -2,6 +2,9 @@ const { withContentlayer } = require("next-contentlayer");
 const { photoLinks } = require("./config/photoLinks");
 
 const nextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     minimumCacheTTL: 604800,
     remotePatterns: [

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { fetcher } from "../lib/readwise";
 import { mq } from "../config/theme";
 
 const Quote = styled.blockquote`

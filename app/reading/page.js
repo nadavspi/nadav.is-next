@@ -1,9 +1,10 @@
-import Head from "next/head";
+"use client"
+
 import Link from "next/link";
-import Navigation from "../components/Navigation";
-import PageContainer from "../components/PageContainer";
+import Navigation from "../../components/Navigation";
+import PageContainer from "../../components/PageContainer";
 import styled from "styled-components";
-import { getBooks } from "../lib/readwise";
+import { getBooks } from "./readwise";
 
 const BookList = styled.ul`
   margin: 0;
@@ -29,13 +30,14 @@ const Author = styled.span`
   font-style: normal;
 `;
 
-export default function Reading({ navigation, books = [] }) {
+// export const metadata = {
+//   title: "My Bookshelf",
+// };
+
+export default async function Reading({ navigation }) {
+  const books = await getBooks();
   return (
     <PageContainer>
-      <Head>
-        <title>My Bookshelf</title>
-      </Head>
-
       <Navigation />
       <main>
         <h1>My Bookshelf</h1>
@@ -54,14 +56,4 @@ export default function Reading({ navigation, books = [] }) {
       </main>
     </PageContainer>
   );
-}
-
-export async function getStaticProps({ params, req }) {
-  const books = await getBooks();
-  return {
-    props: {
-      books,
-    },
-    revalidate: 3600,
-  };
 }
