@@ -1,8 +1,6 @@
 import { getBooks, getBook } from "../readwise";
 import Renderer from "./renderer.js";
 
-// set title
-
 export default function Page({ params }) {
   const book = getBook(params.slug);
   return <Renderer book={book} />;
