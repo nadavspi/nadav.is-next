@@ -29,18 +29,15 @@ export const getBooks = async () => {
 
 export const getBook = async (slug) => {
   const all = await fetchAll();
-  return all
-    .find((book) => book.slug === slug)
-    .map((book) => {
-      const { highlights: h } = book;
-      const lastHighlight = h[h.length - 1].highlighted_at;
-      return {
-        ...book,
-        lastHighlightDate: formatISO(parseISO(lastHighlight), {
-          representation: "date",
-        }),
-      };
-    });
+  const book = all.find((book) => book.slug === slug);
+  const { highlights: h } = book;
+  const lastHighlight = h[h.length - 1].highlighted_at;
+  return {
+    ...book,
+    lastHighlightDate: formatISO(parseISO(lastHighlight), {
+      representation: "date",
+    }),
+  };
 };
 
 export const getHighlights = async (user_book_id) => {
@@ -78,6 +75,7 @@ const fetchAll = async (updatedAfter = null) => {
         headers: {
           Authorization: `Token ${process.env.READWISE_TOKEN}`,
         },
+        next: { revalidate: 3600 },
       },
     );
     const responseJson = await response.json();
