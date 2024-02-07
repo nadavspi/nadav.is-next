@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node app/reading/save.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

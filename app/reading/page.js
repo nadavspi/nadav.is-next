@@ -5,7 +5,7 @@ export const metadata = {
   title: 'My Bookshelf',
 }
 
-export default async function GetBooks() {
-  const books = await getBooks();
+export default function GetBooks() {
+  const books = getBooks();
   return <Renderer books={books} />;
 }

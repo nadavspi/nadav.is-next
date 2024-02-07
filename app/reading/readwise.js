@@ -1,3 +1,4 @@
+import data from "./data.json";
 import slugify from "slugify";
 import { formatISO, parseISO } from "date-fns";
 
@@ -11,12 +12,14 @@ const excludedBooks = (book) => {
     return false;
   }
 
+  if (!book.slug) {
+    return false;
+  }
   return true;
 };
 
-export const getBooks = async () => {
-  const all = await fetchAll();
-  return all
+export const getBooks = () => {
+  return data
     .filter(excludedBooks)
     .map(({ author, category, id, slug, title }) => ({
       author,
@@ -27,22 +30,29 @@ export const getBooks = async () => {
     }));
 };
 
-export const getBook = async (slug) => {
-  const all = await fetchAll();
-  const book = all.find((book) => book.slug === slug);
+export const getBook = (slug) => {
+  if (!slug) {
+    console.error("Need a slug");
+    return;
+  }
+  const book = data.find((book) => book.slug === slug);
   const { highlights: h } = book;
-  const lastHighlight = h[h.length - 1].highlighted_at;
+  const lastHighlight = h[h.length - 1];
+  const date = lastHighlight.highlighted_at || lastHighlight.created_at;
+  if (!date) {
+    console.warn(book.title, "No last highlight date");
+    return book;
+  }
   return {
     ...book,
-    lastHighlightDate: formatISO(parseISO(lastHighlight), {
+    lastHighlightDate: formatISO(parseISO(date), {
       representation: "date",
     }),
   };
 };
 
-export const getHighlights = async (user_book_id) => {
-  const all = await fetchAll();
-  return all
+export const getHighlights = (user_book_id) => {
+  return data
     .find((book) => book.user_book_id === user_book_id)
     .map(({ author, category, highlights, id, title }) => ({
       author,
@@ -51,43 +61,4 @@ export const getHighlights = async (user_book_id) => {
       id,
       title,
     }));
-};
-
-const fetchAll = async (updatedAfter = null) => {
-  let fullData = [];
-  let nextPageCursor = null;
-
-  while (true) {
-    const queryParams = new URLSearchParams();
-    if (nextPageCursor) {
-      queryParams.append("pageCursor", nextPageCursor);
-    }
-    if (updatedAfter) {
-      queryParams.append("updatedAfter", updatedAfter);
-    }
-    console.log(
-      "Making export api request with params " + queryParams.toString(),
-    );
-    const response = await fetch(
-      "https://readwise.io/api/v2/export/?" + queryParams.toString(),
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${process.env.READWISE_TOKEN}`,
-        },
-        next: { revalidate: 3600 },
-      },
-    );
-    const responseJson = await response.json();
-    fullData.push(...responseJson["results"]);
-    nextPageCursor = responseJson["nextPageCursor"];
-    if (!nextPageCursor) {
-      break;
-    }
-  }
-  return fullData.map((book) => ({
-    ...book,
-    id: book.user_book_id,
-    slug: slugify(book.title, { lower: true, strict: true }),
-  }));
 };

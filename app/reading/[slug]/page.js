@@ -3,8 +3,8 @@ import Renderer from "./renderer.js";
 
 // set title
 
-export default async function Page({ params }) {
-  const book = await getBook(params.slug);
+export default function Page({ params }) {
+  const book = getBook(params.slug);
   return <Renderer book={book} />;
 }
 
@@ -16,6 +16,5 @@ export async function generateMetadata({ params }) {
 }
 export async function generateStaticParams() {
   const books = await getBooks();
-  return books.map((book) => ({ slug: book.slug }));
+  return books.filter(book => book.slug).map((book) => ({ slug: book.slug }));
 }
-
