@@ -27,13 +27,6 @@ const Author = styled.span`
   font-style: normal;
 `;
 
-// export const metadata = {
-//   title: "My Bookshelf",
-//   return (
-//   );
-//   };
-// };
-
 export default function Reading({ books }) {
   return (
     <main>

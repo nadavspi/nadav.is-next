@@ -1,6 +1,5 @@
 import slugify from "slugify";
-import { formatISO, parseISO } from "date-fns";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 
 const filename = process.cwd() + "/app/reading/data.json";
 export const saveData = async (updatedAfter = null) => {
