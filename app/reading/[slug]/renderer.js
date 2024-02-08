@@ -1,6 +1,7 @@
 "use client";
 
 import Highlights from "../../../components/Highlights";
+import Link from "next/link";
 import styled from "styled-components";
 import { getBooks, getBook } from "../readwise";
 
@@ -37,6 +38,9 @@ export default function Book({ book }) {
     <main>
       <h1>{book.readable_title}</h1>
       <BookInfo>
+        {book.source_url && (
+          <Link href={book.source_url}>{book.source_url}</Link>
+        )}
         <Metadata>
           <StyledDt>Author</StyledDt>
           <StyledDd>{book.author}</StyledDd>
@@ -53,4 +57,3 @@ export default function Book({ book }) {
     </main>
   );
 }
-
