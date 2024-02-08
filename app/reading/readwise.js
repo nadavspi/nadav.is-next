@@ -1,5 +1,4 @@
 import data from "./data.json";
-import slugify from "slugify";
 import { formatISO, parseISO } from "date-fns";
 
 const excludedBooks = (book) => {
