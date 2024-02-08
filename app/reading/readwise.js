@@ -21,12 +21,12 @@ const excludedBooks = (book) => {
 export const getBooks = () => {
   return data
     .filter(excludedBooks)
-    .map(({ author, category, id, slug, title }) => ({
+    .map(({ author, category, id, slug, readable_title }) => ({
       author,
       category,
       id,
       slug,
-      title,
+      readable_title,
     }));
 };
 
@@ -49,16 +49,4 @@ export const getBook = (slug) => {
       representation: "date",
     }),
   };
-};
-
-export const getHighlights = (user_book_id) => {
-  return data
-    .find((book) => book.user_book_id === user_book_id)
-    .map(({ author, category, highlights, id, title }) => ({
-      author,
-      category,
-      highlights,
-      id,
-      title,
-    }));
 };

@@ -35,7 +35,7 @@ const StyledDd = styled.dd`
 export default function Book({ book }) {
   return (
     <main>
-      <h1>{book.title}</h1>
+      <h1>{book.readable_title}</h1>
       <BookInfo>
         <Metadata>
           <StyledDt>Author</StyledDt>

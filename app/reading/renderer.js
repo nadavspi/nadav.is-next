@@ -43,7 +43,7 @@ export default function Reading({ books }) {
           <Book key={book.id}>
             <BookLink>
               <Link href={`/reading/${book.slug}`}>
-                <Title>{book.title}</Title>
+                <Title>{book.readable_title}</Title>
                 <Author>by {book.author}</Author>
               </Link>
             </BookLink>
