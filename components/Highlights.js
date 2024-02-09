@@ -27,6 +27,12 @@ const Quote = styled.blockquote`
   }
 `;
 
+const Note = styled.div`
+  display: block;
+  margin-top: 1rem;
+  font-style: italic;
+`;
+
 const HighlightsSection = styled.section`
   font-size: ${({ theme }) => theme.fontSizes[4]};
   max-width: 36em;
@@ -37,7 +43,11 @@ const Highlights = ({ highlights = [] }) => {
     <HighlightsSection>
       <h2>My Highlights</h2>
       {highlights.map((highlight) => (
-        <Quote key={highlight.id}>{highlight.text}</Quote>
+        <Quote key={highlight.id}>
+          {highlight.text}
+
+          {highlight.note && <Note>[Nadav’s note: {highlight.note}]</Note>}
+        </Quote>
       ))}
     </HighlightsSection>
   );
