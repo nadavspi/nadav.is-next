@@ -30,6 +30,7 @@
     "stylis": "^4.3.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.5.3",
     "@swc/plugin-styled-components": "^1.5.117",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.2",
